@@ -2,7 +2,7 @@
   "schema_version": 2,
   "team": {
     "name": "agentmarkup",
-    "members": ["cochinescu"]
+    "members": ["cochinescu", "pax-k"]
   },
   "track": "ai-search-optimization",
   "problem": "A B2B SaaS founder or marketer cannot tell whether the AI crawlers behind ChatGPT, Claude and Perplexity can actually reach and read their website while a competitor's is fully readable; this skill audits both live as each crawler and returns an evidence-backed gap report plus draft llms.txt, robots.txt patch and Studio handoff.",

@@ -4,7 +4,7 @@ Fallback at ~60 seconds: open [`demo/output/report.md`](demo/output/report.md).
 
 ## Say this - 20 seconds
 
-**Team:** agentmarkup (Sebastian Cochinescu, Anima Felix)
+**Team:** agentmarkup (Sebastian Cochinescu, Anima Felix; with pax-k)
 
 **Track:** ai-search-optimization
 
