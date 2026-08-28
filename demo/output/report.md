@@ -1,10 +1,6 @@
 # AgentMarkup field report
 
-<<<<<<< HEAD
-Generated 2026-08-28T17:25:35.597Z from live audits. "You" = https://calm.com -> https://www.calm.com/; competitors: https://rootd.io, https://wysa.com, https://animafelix.com.
-=======
 Generated 2026-08-28T17:24:28.014Z from @agentmarkup/audit@0.2.5. Subject: https://calm.com. Compared with: https://rootd.io, https://wysa.com, https://animafelix.com.
->>>>>>> pax-pr
 
 ## Outcome
 
@@ -29,21 +25,6 @@ These are simulated User-Agent requests from this runner. Verified crawler IP ac
 
 | Capability | calm.com | rootd.io | wysa.com | animafelix.com |
 | --- | --- | --- | --- | --- |
-<<<<<<< HEAD
-| GPTBot (ChatGPT) can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
-| OAI-SearchBot can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
-| ClaudeBot (Claude) can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
-| PerplexityBot can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
-| Google-Extended can fetch the page | ✅ 200 | ✅ 200 | ✅ 200 | ✅ 200 |
-| llms.txt published and valid | ⚠️ | ⚠️ | ⚠️ | ✅ |
-| JSON-LD structured data | ⚠️ | ⚠️ | ✅ | ✅ |
-| Content-Signal policy in robots.txt | ⚠️ | ⚠️ | ⚠️ | ⚠️ |
-| robots.txt allows AI crawlers | ✅ | ✅ | ✅ | ✅ |
-| Sitemap published | ✅ | ✅ | ✅ | ✅ |
-| Core page metadata complete | ⚠️ | ⚠️ | ✅ | ✅ |
-| Content in server-rendered HTML | ✅ | ✅ | ✅ | ✅ |
-| Missing paths return a real 404 | ✅ | ✅ | ⚠️ | ✅ |
-=======
 | GPTBot User-Agent access | WARN (E-dde85f911173) | WARN (E-db3faed95061) | WARN (E-f5e0a42984f4) | PASS (E-0c7b983c60f0) |
 | OAI-SearchBot User-Agent access | WARN (E-b5f5a72e1c29) | WARN (E-fe07775c57d8) | WARN (E-f47979e42845) | PASS (E-11c04eb754c5) |
 | ClaudeBot User-Agent access | WARN (E-8b623aaf0d55) | WARN (E-32bd883c5fb7) | WARN (E-99b15669800f) | PASS (E-57d69d452f15) |
@@ -59,25 +40,9 @@ These are simulated User-Agent requests from this runner. Verified crawler IP ac
 | Sitemap discovery | PASS (E-40e8be6758b9) | PASS (E-c2878c0aca9a) | PASS (E-7bc6071fd5f3) | PASS (E-04925ace34f7) |
 | Core page metadata | WARN (E-ae9f65808bd1) | WARN (E-ee2710bb79e5) | PASS (E-858f13fe5400) | PASS (E-9122a0f1fea6) |
 | Missing-path HTTP behavior | PASS (E-999ac4b3d0a8) | PASS (E-1c03159a6594) | PASS (E-f677f5140431) | PASS (E-f39e75b67e3f) |
->>>>>>> pax-pr
 
 ## Crawl-access scoreboard
 
-<<<<<<< HEAD
-## Observed-check coverage
-```diff
-- calm.com        █████░░░░░░░░░   5/14  4 AI crawlers refused
-- rootd.io        █████░░░░░░░░░   5/14  4 AI crawlers refused
-- wysa.com        ██████░░░░░░░░   6/14  4 AI crawlers refused
-+ animafelix.com  █████████████░  13/14  answered every crawler tested
-```
-
-- https://calm.com: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:25:25.966Z)
-- https://rootd.io: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:25:25.976Z)
-- https://wysa.com: 6 pass / 7 warn / 0 error (fetched 2026-08-28T17:25:25.963Z)
-- https://animafelix.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T17:25:26.026Z)
-- Grounding: homepage 200 (565142 bytes, final https://www.calm.com/); robots.txt 200
-=======
 ```diff
 - calm.com        █████░░░░░░░░░   5/14  4 crawler User-Agents refused
 - rootd.io        █████░░░░░░░░░   5/14  4 crawler User-Agents refused
@@ -86,7 +51,6 @@ These are simulated User-Agent requests from this runner. Verified crawler IP ac
 ```
 
 ## Matched peer differences
->>>>>>> pax-pr
 
 - **GPTBot User-Agent access:** subject WARN (E-dde85f911173); animafelix.com PASS (E-0c7b983c60f0). Owner: infrastructure.
 - **OAI-SearchBot User-Agent access:** subject WARN (E-b5f5a72e1c29); animafelix.com PASS (E-11c04eb754c5). Owner: infrastructure.
@@ -102,28 +66,12 @@ These are simulated User-Agent requests from this runner. Verified crawler IP ac
 
 ### E-dde85f911173 — OpenAI gptbot is blocked from a generic IP
 
-<<<<<<< HEAD
-## https://wysa.com warn/error findings
-- WARN — OpenAI gptbot is blocked from a generic IP
-  Evidence: gptbot → status=403; browser → status=200
-- WARN — OpenAI oai-searchbot is blocked from a generic IP
-  Evidence: oai-searchbot → status=403; browser → status=200
-- WARN — Anthropic claudebot is blocked from a generic IP
-  Evidence: claudebot → status=403; browser → status=200
-- WARN — Perplexity perplexitybot is blocked from a generic IP
-  Evidence: perplexitybot → status=403; browser → status=200
-- WARN — No Content-Signal policy in robots.txt
-- WARN — No llms.txt found
-- WARN — Missing paths answer 429, not 404
-  Evidence: GET https://wysa.com/agentmarkup-probe-404-does-not-exist-9f3a2c -> 429
-=======
 - **State:** WARN; basis: direct-observation
 - **Observed:** gptbot → status=403; browser → status=200
 - **Owner:** infrastructure
 - **Review action:** If a WAF rule blocks the "gptbot" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed.
 - **Done when:** Repeat paired requests; require crawler.accessible for GPTBot.
 - **Peer proof:** animafelix.com explicitly passed this capability.
->>>>>>> pax-pr
 
 ### E-b5f5a72e1c29 — OpenAI oai-searchbot is blocked from a generic IP
 
@@ -134,13 +82,7 @@ These are simulated User-Agent requests from this runner. Verified crawler IP ac
 - **Done when:** Repeat paired requests; require crawler.accessible for OAI-SearchBot.
 - **Peer proof:** animafelix.com explicitly passed this capability.
 
-<<<<<<< HEAD
-Versus https://wysa.com (5 vs 6 passing):
-- They pass this check, you don't: No JSON-LD structured data
-- They pass this check, you don't: Core page metadata is incomplete
-=======
 ### E-8b623aaf0d55 — Anthropic claudebot is blocked from a generic IP
->>>>>>> pax-pr
 
 - **State:** WARN; basis: direct-observation
 - **Observed:** claudebot → status=403; browser → status=200
@@ -151,19 +93,12 @@ Versus https://wysa.com (5 vs 6 passing):
 
 ### E-168f138127c1 — Perplexity perplexitybot is blocked from a generic IP
 
-<<<<<<< HEAD
-**1. Candidate fixes agentmarkup can generate** - build-time markup and crawler directives; drafts are in this folder:
-- [warn] No Content-Signal policy in robots.txt -> Enable agentmarkup contentSignalHeaders so Content-Signal is written into robots.txt.
-- [warn] No llms.txt found -> Generate llms.txt with agentmarkup if you want a curated agent manifest.
-- [warn] No JSON-LD structured data -> Add JSON-LD with agentmarkup schema presets (webSite, organization, article, …).
-=======
 - **State:** WARN; basis: direct-observation
 - **Observed:** perplexitybot → status=403; browser → status=200
 - **Owner:** infrastructure
 - **Review action:** If a WAF rule blocks the "perplexitybot" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed.
 - **Done when:** Repeat paired requests; require crawler.accessible for PerplexityBot.
 - **Peer proof:** animafelix.com explicitly passed this capability.
->>>>>>> pax-pr
 
 ### E-d8ec15d2abd1 — No llms.txt found
 
@@ -183,10 +118,6 @@ Versus https://wysa.com (5 vs 6 passing):
 - **Done when:** Rerun @agentmarkup/audit@0.2.5 and require jsonld.present.
 - **Peer proof:** wysa.com, animafelix.com explicitly passed this capability.
 
-<<<<<<< HEAD
-## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T17:25:35.597Z.
-=======
 ### E-ae9f65808bd1 — Core page metadata is incomplete
 
 - **State:** WARN; basis: direct-observation
@@ -228,4 +159,3 @@ Full evidence receipts are in `evidence.json`; raw audit findings remain in `aud
 - **Not measured:** assistant citations, rankings, traffic, third-party authority, or access from verified crawler IP ranges.
 - **Unknown:** 0 domain(s); NOT_REPORTED cells remain neutral and are excluded from matched gaps.
 - Hostname validation is textual only. Findings are a live snapshot and can change after this run.
->>>>>>> pax-pr

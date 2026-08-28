@@ -18,11 +18,7 @@ The boundary is important: this is crawl-readiness evidence. It does not claim a
 4. Expect the live runner to finish in about 10 seconds. It writes the report, visual, fix pack, receipts, review artifacts, raw audits, and run summary under `out/`.
 5. At 60 seconds, stop waiting and use the saved fallback.
 
-<<<<<<< HEAD
-Say: "When someone asks ChatGPT for help with anxiety, ChatGPT has to be able to read the site first. We are checking four apps in that category, live - and three of them returned HTTP 403 to the AI-crawler user-agents we tested while returning 200 to a browser seconds apart. We cannot tell from outside whether that is deliberate or a bot-protection rule; we can only show you the responses."
-=======
 While it runs, say:
->>>>>>> pax-pr
 
 > The first domain is the subject. The second is the peer. The skill sends one browser-control request and named crawler User-Agent requests to the same public page. It compares only like-for-like capabilities. An unknown stays unknown, and an unreported check stays neutral.
 
@@ -32,21 +28,13 @@ While it runs, say:
 
 Open `out/brief.svg`.
 
-<<<<<<< HEAD
-Open `out/report.md`. Point to **Top actions**, then the **AI readiness matrix** - every check as a row, every site as a column, green ticks against warnings and one red error - then the colour-coded coverage block (red lines are sites that returned 403 to a tested crawler user-agent, green is one that answered all of them), then the triaged fix plan.
-=======
 Point to these three parts:
->>>>>>> pax-pr
 
 - **Outcome:** Calm has 1 crawler User-Agent identity that matched the browser control, with 8 review actions remaining. This is a count, not a readiness score.
 - **Same URL, two identities:** the browser control received HTTP 200, while the GPTBot User-Agent received HTTP 403.
 - **First actions:** each card has a severity, evidence receipt, owner, and exact recheck condition.
 
-<<<<<<< HEAD
-Say: "Look at the matrix - one column per company, one row per check, every cell a real response. Three of these sites returned 403 to the ChatGPT, Claude and Perplexity crawler user-agents while a browser got 200, seconds apart from the same machine. The fourth column, animafelix.com, answered every crawler we tested - and it is our own site, disclosed in the input file as the reference implementation for this tooling."
-=======
 Say:
->>>>>>> pax-pr
 
 > This is the signature moment: one URL, two request identities, two observed responses. The visual does not hide the distinction between the overall site result and this specific crawler warning.
 

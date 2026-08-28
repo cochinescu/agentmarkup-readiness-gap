@@ -1,11 +1,7 @@
 {
   "url": "https://animafelix.com",
   "finalUrl": "https://animafelix.com/",
-<<<<<<< HEAD
-  "fetchedAt": "2026-08-28T17:25:26.026Z",
-=======
   "fetchedAt": "2026-08-28T17:24:19.226Z",
->>>>>>> pax-pr
   "findings": [
     {
       "code": "crawler.accessible",
