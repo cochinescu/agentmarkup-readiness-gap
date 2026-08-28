@@ -1,11 +1,13 @@
 # AgentMarkup readiness gap
 
-Generated 2026-08-28T15:08:41.215Z from live audits. "You" = https://nonexistent-zz9x7q-skillathon.invalid -> https://nonexistent-zz9x7q-skillathon.invalid/; competitors: https://monday.com.
+Generated 2026-08-28T15:31:49.230Z from live audits. "You" = https://nonexistent-zz9x7q-skillathon.invalid -> https://nonexistent-zz9x7q-skillathon.invalid/; competitors: https://monday.com.
 
 ## Coverage
 - https://nonexistent-zz9x7q-skillathon.invalid: UNKNOWN (no browser baseline (crawler.control-failed)) — excluded from comparison, not a weakness
-- https://monday.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T15:08:33.798Z)
+- https://monday.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T15:31:43.423Z)
 - Grounding: homepage fetch-failed — NOT usable as evidence; robots.txt fetch-failed — NOT usable as evidence
+
+How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
 
 ## https://monday.com warn/error findings
 - WARN — llms.txt is not linked from the homepage
@@ -15,4 +17,4 @@ Generated 2026-08-28T15:08:41.215Z from live audits. "You" = https://nonexistent
 - Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
 
 ## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 1. Grounding for "you" failed or was unusable, so drafts are [TODO] stubs. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T15:08:41.215Z.
+Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 1. Grounding for "you" failed or was unusable, so drafts are [TODO] stubs. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T15:31:49.230Z.

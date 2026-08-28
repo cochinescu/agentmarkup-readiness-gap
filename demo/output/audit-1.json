@@ -1,7 +1,7 @@
 {
   "url": "https://monday.com",
   "finalUrl": "https://monday.com/",
-  "fetchedAt": "2026-08-28T15:08:11.153Z",
+  "fetchedAt": "2026-08-28T15:31:52.247Z",
   "findings": [
     {
       "code": "crawler.accessible",
@@ -43,7 +43,7 @@
       "level": "pass",
       "title": "Content is present without JavaScript",
       "detail": "The raw HTML already contains meaningful text, so crawlers that do not execute JavaScript can read the page.",
-      "evidence": "raw text length=16362"
+      "evidence": "raw text length=15910"
     },
     {
       "code": "robots.crawlers-allowed",

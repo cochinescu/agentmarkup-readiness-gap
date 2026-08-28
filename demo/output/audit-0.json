@@ -1,7 +1,7 @@
 {
   "url": "https://notion.so",
   "finalUrl": "https://www.notion.com/",
-  "fetchedAt": "2026-08-28T15:08:11.149Z",
+  "fetchedAt": "2026-08-28T15:31:52.247Z",
   "findings": [
     {
       "code": "crawler.accessible",

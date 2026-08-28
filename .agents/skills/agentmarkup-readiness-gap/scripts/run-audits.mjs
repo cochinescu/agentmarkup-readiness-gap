@@ -115,6 +115,31 @@ const fmt = (f) => `- ${(f.level ?? 'warn').toUpperCase()} — ${esc(f.title)}${
 const lines = [];
 lines.push(`# AgentMarkup readiness gap`, ``);
 lines.push(`Generated ${now} from live audits. "You" = ${you.url}${you.finalUrl && you.finalUrl !== you.url ? ` -> ${you.finalUrl}` : ''}; competitors: ${competitors.map((c) => c.url).join(', ') || 'none'}.`, ``);
+
+// Executive view first: the three most serious observed findings, each with its raw evidence
+// and who has to act. Observations only - no traffic, revenue or ranking claims.
+const OWNER = {
+  'llms.invalid': 'agentmarkup', 'llms.missing': 'agentmarkup', 'llms.no-discovery-link': 'agentmarkup',
+  'jsonld.missing': 'agentmarkup', 'jsonld.invalid': 'agentmarkup',
+  'robots.no-content-signal': 'agentmarkup', 'robots.crawlers-blocked': 'agentmarkup',
+  'markdown.missing': 'agentmarkup', 'sitemap.missing': 'agentmarkup',
+  'meta.incomplete': 'content owner', 'js.client-rendered': 'content owner',
+  'notfound.soft404': 'infrastructure', 'notfound.unknown': 'infrastructure',
+  'crawler.bot-challenge': 'infrastructure', 'crawler.blocked': 'infrastructure', 'crawler.rate-limited': 'infrastructure',
+};
+if (you.status === 'ok') {
+  const top = [...(you.json.findings || []).filter((f) => f.level !== 'pass')]
+    .sort((a, b) => (a.level === 'error' ? -1 : 1) - (b.level === 'error' ? -1 : 1))
+    .slice(0, 3);
+  if (top.length) {
+    lines.push(`## Top actions`, ``);
+    lines.push(`| Finding | Observed evidence | Who fixes it |`, `| --- | --- | --- |`);
+    for (const f of top) {
+      lines.push(`| ${esc(f.title)} | ${esc(f.evidence) || 'reported by the audit; see the findings below'} | ${OWNER[f.code] ?? 'needs review'} |`);
+    }
+    lines.push(``);
+  }
+}
 lines.push(`## Coverage`);
 for (const a of audits) {
   lines.push(a.status === 'ok'
@@ -122,6 +147,7 @@ for (const a of audits) {
     : `- ${a.url}: UNKNOWN (${a.reason}) — excluded from comparison, not a weakness`);
 }
 lines.push(`- Grounding: homepage ${home.status}${home.ok ? ` (${home.bytes} bytes, final ${home.finalUrl})` : ' — NOT usable as evidence'}; robots.txt ${robots.status}${robots.status === 404 ? ' (no robots.txt exists)' : robots.ok ? '' : ' — NOT usable as evidence'}`, ``);
+lines.push(`How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like \`google-extended -> status=403; browser -> status=200\` means that crawler was refused the exact page a browser received.`, ``);
 for (const a of audits) {
   if (a.status !== 'ok') continue;
   lines.push(`## ${a.url} warn/error findings`);
@@ -149,9 +175,32 @@ if (you.status === 'ok' && competitors.some((c) => c.status === 'ok')) {
   }
 }
 if (you.status === 'ok') {
-  lines.push(`## Fix plan (the audit's own fix guidance, errors first)`);
+  // Triage: what a build-time markup tool can fix, what a human must write, what infrastructure
+  // decides, and what nothing here can see. Stated plainly so the report never implies markup
+  // solves everything.
+  const BUCKET = {
+    'llms.invalid': 'tool', 'llms.missing': 'tool', 'llms.no-discovery-link': 'tool',
+    'jsonld.missing': 'tool', 'jsonld.invalid': 'tool',
+    'robots.no-content-signal': 'tool', 'robots.crawlers-blocked': 'tool',
+    'markdown.missing': 'tool', 'sitemap.missing': 'tool',
+    'meta.incomplete': 'content', 'js.client-rendered': 'content',
+    'notfound.soft404': 'infra', 'notfound.unknown': 'infra',
+    'crawler.bot-challenge': 'infra', 'crawler.blocked': 'infra', 'crawler.rate-limited': 'infra',
+  };
   const ordered = [...warnErr(you)].sort((a, b) => (a.level === 'error' ? -1 : 1) - (b.level === 'error' ? -1 : 1));
-  lines.push(...ordered.filter((f) => f.fix).map((f, i) => `${i + 1}. [${f.level}] ${esc(f.fix)}`), ``);
+  const bucketed = { tool: [], content: [], infra: [], other: [] };
+  for (const f of ordered) bucketed[BUCKET[f.code] ?? 'other'].push(f);
+  const render = (arr) => arr.map((f) => `- [${f.level}] ${esc(f.title)}${f.fix ? ` -> ${esc(f.fix)}` : ''}`);
+
+  lines.push(`## Fix plan, triaged (errors first, using the audit's own fix guidance)`);
+  lines.push(``, `**1. agentmarkup can fix these** - build-time markup and crawler directives; drafts are in this folder:`);
+  lines.push(...(bucketed.tool.length ? render(bucketed.tool) : ['- none']));
+  lines.push(``, `**2. Needs a human content or template change** - no markup tool writes your copy:`);
+  lines.push(...(bucketed.content.length ? render(bucketed.content) : ['- none']));
+  lines.push(``, `**3. Server, CDN or bot-protection settings** - your infrastructure decides, not your markup:`);
+  lines.push(...(bucketed.infra.length ? render(bucketed.infra) : ['- none']));
+  if (bucketed.other.length) { lines.push(``, `**4. Other findings:**`, ...render(bucketed.other)); }
+  lines.push(``, `**Not visible from here at all:** third-party authority - who else cites you and how assistants weigh it. No markup tool changes that, and this report does not pretend to measure it.`, ``);
 }
 lines.push(`## Fix exits`);
 lines.push(`- JS build: \`npm i -D @agentmarkup/<vite|astro|next|nuxt>\` — regenerates and validates these files on every build.`);
