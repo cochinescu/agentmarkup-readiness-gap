@@ -1,0 +1,110 @@
+{
+  "url": "https://notion.so",
+  "finalUrl": "https://www.notion.com/",
+  "fetchedAt": "2026-08-28T15:08:11.149Z",
+  "findings": [
+    {
+      "code": "crawler.accessible",
+      "level": "pass",
+      "title": "OpenAI gptbot can reach the page",
+      "detail": "A request with the gptbot user-agent returned the same success class as a browser.",
+      "evidence": "gptbot → status=200; browser → status=200"
+    },
+    {
+      "code": "crawler.accessible",
+      "level": "pass",
+      "title": "OpenAI oai-searchbot can reach the page",
+      "detail": "A request with the oai-searchbot user-agent returned the same success class as a browser.",
+      "evidence": "oai-searchbot → status=200; browser → status=200"
+    },
+    {
+      "code": "crawler.accessible",
+      "level": "pass",
+      "title": "Anthropic claudebot can reach the page",
+      "detail": "A request with the claudebot user-agent returned the same success class as a browser.",
+      "evidence": "claudebot → status=200; browser → status=200"
+    },
+    {
+      "code": "crawler.accessible",
+      "level": "pass",
+      "title": "Perplexity perplexitybot can reach the page",
+      "detail": "A request with the perplexitybot user-agent returned the same success class as a browser.",
+      "evidence": "perplexitybot → status=200; browser → status=200"
+    },
+    {
+      "code": "crawler.bot-challenge",
+      "level": "warn",
+      "title": "Google google-extended hit a bot challenge",
+      "detail": "The google-extended user-agent got a challenge/verification response (403). Because google-extended is verified by reverse-dns, the real crawler may pass where this spoofed user-agent does not. Confirm the verified bot is allowlisted at your CDN.",
+      "evidence": "google-extended → status=403; browser → status=200",
+      "fix": "Allowlist the crawler by its published IP ranges (verified bots) rather than relying on user-agent rules."
+    },
+    {
+      "code": "js.server-rendered",
+      "level": "pass",
+      "title": "Content is present without JavaScript",
+      "detail": "The raw HTML already contains meaningful text, so crawlers that do not execute JavaScript can read the page.",
+      "evidence": "raw text length=2588"
+    },
+    {
+      "code": "robots.crawlers-allowed",
+      "level": "pass",
+      "title": "robots.txt does not block the expected AI crawlers",
+      "detail": "None of the checked AI crawlers are shadowed by a wildcard disallow."
+    },
+    {
+      "code": "robots.no-content-signal",
+      "level": "warn",
+      "title": "No Content-Signal policy in robots.txt",
+      "detail": "Content-Signal in robots.txt is the canonical place to state training/search/ai-input preferences. It may still be set as an HTTP header, which fewer tools read.",
+      "fix": "Enable agentmarkup contentSignalHeaders so Content-Signal is written into robots.txt."
+    },
+    {
+      "code": "llms.invalid",
+      "level": "error",
+      "title": "llms.txt has errors",
+      "detail": "llms.txt must start with an H1 heading (# Site Name)"
+    },
+    {
+      "code": "llms.no-discovery-link",
+      "level": "warn",
+      "title": "llms.txt is not linked from the homepage",
+      "detail": "An llms.txt exists but the homepage has no <link rel=\"alternate\" type=\"text/plain\" href=\"/llms.txt\">, so agents cannot discover it from the page.",
+      "fix": "agentmarkup injects this discovery link automatically."
+    },
+    {
+      "code": "jsonld.missing",
+      "level": "warn",
+      "title": "No JSON-LD structured data",
+      "detail": "The page has no JSON-LD. Structured data helps AI systems and search understand the page entity.",
+      "fix": "Add JSON-LD with agentmarkup schema presets (webSite, organization, article, …)."
+    },
+    {
+      "code": "sitemap.present",
+      "level": "pass",
+      "title": "Sitemap found",
+      "detail": "A sitemap is declared in robots.txt, which helps crawlers and AI systems discover all of your pages."
+    },
+    {
+      "code": "meta.complete",
+      "level": "pass",
+      "title": "Core page metadata present",
+      "detail": "The page has a title, a meta description, and a canonical link, which help AI systems and search attribute the page."
+    },
+    {
+      "code": "notfound.unknown",
+      "level": "warn",
+      "title": "Could not determine how missing paths are handled",
+      "detail": "The request for a path that should not exist did not complete, so it is unknown whether this site returns a real 404. A timeout or a block is not evidence of a soft-404.",
+      "evidence": "too-many-redirects"
+    }
+  ],
+  "summary": {
+    "pass": 8,
+    "warn": 5,
+    "error": 1,
+    "checks": 14,
+    "passed": 8,
+    "worst": "error"
+  }
+}

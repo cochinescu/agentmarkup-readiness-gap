@@ -1,1 +1,1 @@
-$TODO-skill-name Use the input at demo/input/TODO-file and produce TODO the observable result named in DEMO.md.
+Run $agentmarkup-readiness-gap on demo/input/domains.md and give me a 5-line summary of the biggest gaps; the full report and fix drafts will be in out/.

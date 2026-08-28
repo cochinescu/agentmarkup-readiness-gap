@@ -1,0 +1,8 @@
+# The AI workspace that works for you. | Notion
+
+> Build Custom Agents, search across all your apps, and automate busywork. The AI workspace where teams get more done, faster.
+
+## Pages
+- [TODO curated key pages with one-line descriptions]
+
+# Draft generated 2026-08-28T15:08:21.593Z by agentmarkup-readiness-gap from the live homepage of https://notion.so (HTTP 200); review before publishing

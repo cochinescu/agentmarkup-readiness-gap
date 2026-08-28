@@ -1,18 +1,18 @@
 {
   "schema_version": 2,
   "team": {
-    "name": "TODO team name",
-    "members": ["TODO member 1"]
+    "name": "agentmarkup",
+    "members": ["cochinescu"]
   },
-  "track": "TODO one of: ai-search-optimization | personalized-growth-engines | churn-detection | synthetic-buyer-simulations | plg-automation | multi-agent-orchestration | custom",
-  "problem": "TODO one sentence: who has what GTM problem and what the skill produces",
-  "entry_skill": ".agents/skills/TODO-skill-name/SKILL.md",
+  "track": "ai-search-optimization",
+  "problem": "A B2B SaaS founder or marketer cannot tell whether the AI crawlers behind ChatGPT, Claude and Perplexity can actually reach and read their website while a competitor's is fully readable; this skill audits both live as each crawler and returns an evidence-backed gap report plus draft llms.txt, robots.txt patch and Studio handoff.",
+  "entry_skill": ".agents/skills/agentmarkup-readiness-gap/SKILL.md",
   "skills": [
-    { "path": ".agents/skills/TODO-skill-name/SKILL.md", "role": "TODO the one job this skill owns" }
+    { "path": ".agents/skills/agentmarkup-readiness-gap/SKILL.md", "role": "Audit your site and competitors as each AI crawler, then report the readiness gap with evidence and draft the fixes" }
   ],
   "seed_prompt": "demo/seed-prompt.md",
-  "input": "demo/input/TODO-file",
-  "output": "demo/output/TODO-file",
+  "input": "demo/input/domains.md",
+  "output": "demo/output/report.md",
   "evals": "demo/evals.md",
   "run_sheet": "DEMO.md"
 }
