@@ -14,7 +14,7 @@ Fallback at ~60 seconds: open [`demo/output/report.md`](demo/output/report.md).
 
 **Boundary - what it never does:** it never invents a score and never claims who ChatGPT cites or how anyone ranks.
 
-Say: "When someone asks ChatGPT for help with anxiety, ChatGPT has to be able to read the site first. We are checking four apps in that category, live - and three of them answer a browser while slamming the door on ChatGPT's crawler. Nobody decided that; a bot-protection rule did."
+Say: "When someone asks ChatGPT for help with anxiety, ChatGPT has to be able to read the site first. We are checking four apps in that category, live - and three of them returned HTTP 403 to the AI-crawler user-agents we tested while returning 200 to a browser seconds apart. We cannot tell from outside whether that is deliberate or a bot-protection rule; we can only show you the responses."
 
 ## Run this - 60 seconds
 
@@ -28,11 +28,11 @@ While it runs, say: "The first website is treated as ours, Calm, and the rest as
 
 ## Show this - 25 seconds
 
-Open `out/report.md`. Point to **Top actions**, then the **AI readiness matrix** - every check as a row, every site as a column, green ticks against warnings and one red error - then the colour-coded scoreboard (red lines are sites refusing an AI crawler, green is one that answers all of them), then the triaged fix plan.
+Open `out/report.md`. Point to **Top actions**, then the **AI readiness matrix** - every check as a row, every site as a column, green ticks against warnings and one red error - then the colour-coded coverage block (red lines are sites that returned 403 to a tested crawler user-agent, green is one that answered all of them), then the triaged fix plan.
 
 **Result:** a gap report that opens with the top three actions and who owns each - **read the two passing-check totals off the live screen** - plus three ready-to-review drafts: `out/llms.txt`, `out/robots-patch.txt`, `out/studio-handoff.md`.
 
-Say: "Look at the matrix - one column per company, one row per check, every cell a real response. Three columns are 403 to ChatGPT, Claude and Perplexity while a browser gets 200, seconds apart from the same machine. That is most of a category being invisible to AI assistants without knowing it. The column that answers everything is a small studio in Bucharest running this tooling."
+Say: "Look at the matrix - one column per company, one row per check, every cell a real response. Three of these sites returned 403 to the ChatGPT, Claude and Perplexity crawler user-agents while a browser got 200, seconds apart from the same machine. The fourth column, animafelix.com, answered every crawler we tested - and it is our own site, disclosed in the input file as the reference implementation for this tooling."
 
 **Evidence:** every finding carries the raw server response and a fetched-at timestamp; the Limitations section states what was not tested.
 

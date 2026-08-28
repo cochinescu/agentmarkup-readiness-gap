@@ -199,7 +199,7 @@ if (audits.some((a) => a.status === 'ok')) {
   lines.push(``, `✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.`, ``);
 }
 
-lines.push(`## Coverage`);
+lines.push(`## Observed-check coverage`);
 const bar = (n, total) => '█'.repeat(Math.max(0, n)) + '░'.repeat(Math.max(0, total - n));
 const maxChecks = Math.max(...audits.filter((a) => a.status === 'ok').map((a) => a.counts.pass + a.counts.warn + a.counts.error), 1);
 if (audits.some((a) => a.status === 'ok')) {
@@ -213,7 +213,7 @@ if (audits.some((a) => a.status === 'ok')) {
     if (a.status !== 'ok') { lines.push(`! ${host}  ${'?'.repeat(maxChecks)}  UNKNOWN - not auditable`); continue; }
     const blocked = blockedCount(a);
     const marker = blocked > 0 || a.counts.error > 0 ? '-' : a.counts.warn > 2 ? '!' : '+';
-    const note = blocked > 0 ? `${blocked} AI crawler${blocked > 1 ? 's' : ''} refused` : a.counts.error > 0 ? 'error-level finding' : a.counts.warn > 2 ? 'gaps to close' : 'readable by every crawler tested';
+    const note = blocked > 0 ? `${blocked} AI crawler${blocked > 1 ? 's' : ''} refused` : a.counts.error > 0 ? 'error-level finding' : a.counts.warn > 2 ? 'gaps to close' : 'answered every crawler tested';
     lines.push(`${marker} ${host}  ${bar(a.counts.pass, maxChecks)}  ${String(a.counts.pass).padStart(2)}/${maxChecks}  ${note}`);
   }
   lines.push('```', ``);
@@ -271,7 +271,7 @@ if (you.status === 'ok') {
   const render = (arr) => arr.map((f) => `- [${f.level}] ${esc(f.title)}${f.fix ? ` -> ${esc(f.fix)}` : ''}`);
 
   lines.push(`## Fix plan, triaged (errors first, using the audit's own fix guidance)`);
-  lines.push(``, `**1. agentmarkup can fix these** - build-time markup and crawler directives; drafts are in this folder:`);
+  lines.push(``, `**1. Candidate fixes agentmarkup can generate** - build-time markup and crawler directives; drafts are in this folder:`);
   lines.push(...(bucketed.tool.length ? render(bucketed.tool) : ['- none']));
   lines.push(``, `**2. Needs a human content or template change** - no markup tool writes your copy:`);
   lines.push(...(bucketed.content.length ? render(bucketed.content) : ['- none']));

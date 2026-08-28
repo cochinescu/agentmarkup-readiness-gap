@@ -1,6 +1,6 @@
 # AgentMarkup readiness gap
 
-Generated 2026-08-28T17:21:16.010Z from live audits. "You" = https://calm.com -> https://www.calm.com/; competitors: https://rootd.io, https://wysa.com, https://animafelix.com.
+Generated 2026-08-28T17:25:35.597Z from live audits. "You" = https://calm.com -> https://www.calm.com/; competitors: https://rootd.io, https://wysa.com, https://animafelix.com.
 
 ## Top actions
 
@@ -26,22 +26,22 @@ Generated 2026-08-28T17:21:16.010Z from live audits. "You" = https://calm.com ->
 | Sitemap published | ✅ | ✅ | ✅ | ✅ |
 | Core page metadata complete | ⚠️ | ⚠️ | ✅ | ✅ |
 | Content in server-rendered HTML | ✅ | ✅ | ✅ | ✅ |
-| Missing paths return a real 404 | ✅ | ✅ | ✅ | ✅ |
+| Missing paths return a real 404 | ✅ | ✅ | ⚠️ | ✅ |
 
 ✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.
 
-## Coverage
+## Observed-check coverage
 ```diff
 - calm.com        █████░░░░░░░░░   5/14  4 AI crawlers refused
 - rootd.io        █████░░░░░░░░░   5/14  4 AI crawlers refused
-- wysa.com        ███████░░░░░░░   7/14  4 AI crawlers refused
-+ animafelix.com  █████████████░  13/14  readable by every crawler tested
+- wysa.com        ██████░░░░░░░░   6/14  4 AI crawlers refused
++ animafelix.com  █████████████░  13/14  answered every crawler tested
 ```
 
-- https://calm.com: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:21:07.100Z)
-- https://rootd.io: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:21:07.058Z)
-- https://wysa.com: 7 pass / 6 warn / 0 error (fetched 2026-08-28T17:21:07.067Z)
-- https://animafelix.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T17:21:07.098Z)
+- https://calm.com: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:25:25.966Z)
+- https://rootd.io: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:25:25.976Z)
+- https://wysa.com: 6 pass / 7 warn / 0 error (fetched 2026-08-28T17:25:25.963Z)
+- https://animafelix.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T17:25:26.026Z)
 - Grounding: homepage 200 (565142 bytes, final https://www.calm.com/); robots.txt 200
 
 How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
@@ -87,6 +87,8 @@ How to read the evidence: each site was requested twice, once under an AI crawle
   Evidence: perplexitybot → status=403; browser → status=200
 - WARN — No Content-Signal policy in robots.txt
 - WARN — No llms.txt found
+- WARN — Missing paths answer 429, not 404
+  Evidence: GET https://wysa.com/agentmarkup-probe-404-does-not-exist-9f3a2c -> 429
 
 ## https://animafelix.com warn/error findings
 - WARN — No Content-Signal policy in robots.txt
@@ -95,7 +97,7 @@ How to read the evidence: each site was requested twice, once under an AI crawle
 Versus https://rootd.io (5 vs 5 passing):
 - No check where this competitor passes and you fail.
 
-Versus https://wysa.com (5 vs 7 passing):
+Versus https://wysa.com (5 vs 6 passing):
 - They pass this check, you don't: No JSON-LD structured data
 - They pass this check, you don't: Core page metadata is incomplete
 
@@ -106,7 +108,7 @@ Versus https://animafelix.com (5 vs 13 passing):
 
 ## Fix plan, triaged (errors first, using the audit's own fix guidance)
 
-**1. agentmarkup can fix these** - build-time markup and crawler directives; drafts are in this folder:
+**1. Candidate fixes agentmarkup can generate** - build-time markup and crawler directives; drafts are in this folder:
 - [warn] No Content-Signal policy in robots.txt -> Enable agentmarkup contentSignalHeaders so Content-Signal is written into robots.txt.
 - [warn] No llms.txt found -> Generate llms.txt with agentmarkup if you want a curated agent manifest.
 - [warn] No JSON-LD structured data -> Add JSON-LD with agentmarkup schema presets (webSite, organization, article, …).
@@ -127,4 +129,4 @@ Versus https://animafelix.com (5 vs 13 passing):
 - Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
 
 ## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T17:21:16.010Z.
+Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T17:25:35.597Z.

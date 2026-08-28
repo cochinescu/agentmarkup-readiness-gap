@@ -1,7 +1,7 @@
 {
   "url": "https://rootd.io",
   "finalUrl": "https://www.rootd.io/",
-  "fetchedAt": "2026-08-28T17:21:07.058Z",
+  "fetchedAt": "2026-08-28T17:25:25.976Z",
   "findings": [
     {
       "code": "crawler.ua-differential-block",
