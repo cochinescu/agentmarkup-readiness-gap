@@ -1,66 +1,68 @@
-# GTM Skillathon — participant template
+# agentmarkup-readiness-gap
 
-Build a reusable agent skill that solves one go-to-market problem with real-world web data, in 2.5 hours, and submit it so the jury can run it from a single laptop.
+**Can the AI crawlers behind ChatGPT, Claude and Perplexity actually read your website - and can they read your competitor's?**
 
-This file is written for agents first. If you are a participant, paste the prompt in [Start here](#start-here) into your agent and let it guide you.
+Ask an assistant that question and you get an opinion. This skill dresses up as each crawler, asks the servers, and prints their answers.
 
-- Event: [Build with Codex: GTM Skillathon](https://luma.com/82q9aclg), 28 August 2026, Builders House, București
-- Rules, timeline, and judging: [`RULES.md`](RULES.md) — canonical
-- Build contract for your agent: [`AGENTS.md`](AGENTS.md)
-- Submissions and live board: <https://github.com/formidable-oss/gtm-skillathon-submissions>
+Given a file with your domain and up to three competitors, `$agentmarkup-readiness-gap` requests every site twice - once under each AI crawler's user-agent, once as a browser - compares the results check by check, and writes an evidence-backed gap report plus the fix files themselves.
+
+- **Track:** `ai-search-optimization`
+- **Team:** agentmarkup (`cochinescu`, `pax-k`)
+- **Run it:** paste [`demo/seed-prompt.md`](demo/seed-prompt.md) into Codex at the repository root.
+
+## What it produces
+
+Real output from `demo/input/domains.md`, committed in [`demo/output/report.md`](demo/output/report.md):
+
+| Crawler | notion.so | monday.com |
+| --- | --- | --- |
+| GPTBot (ChatGPT) | ✅ 200 | ✅ 200 |
+| ClaudeBot (Claude) | ✅ 200 | ✅ 200 |
+| PerplexityBot | ✅ 200 | ✅ 200 |
+| Google-Extended | ⚠️ 403 | ✅ 200 |
+
+```
+notion.so   ████████░░░░░░  8/14 checks passed
+monday.com  █████████████░  13/14 checks passed
+```
+
+Every cell is an observed status code from a real request. Notion ships an `llms.txt` and it is invalid; Google's AI crawler is refused the exact page a browser receives.
+
+Alongside the report it writes three reviewable drafts, never applied automatically: [`llms.txt`](demo/output/llms.txt) (filled from the live homepage), [`robots-patch.txt`](demo/output/robots-patch.txt) (built against the live robots.txt, existing directives preserved, conflicts flagged), and [`studio-handoff.md`](demo/output/studio-handoff.md).
+
+Findings are triaged by **who can actually fix them** - agentmarkup, a human content change, or server and CDN settings - and the report states plainly that third-party authority is not measurable here at all.
+
+## Evaluation
+
+Three cases, run against this commit on 2026-08-28 during the build window. Full detail and evidence paths in [`demo/evals.md`](demo/evals.md).
+
+| Case | What was tested | Observed | Result |
+| --- | --- | --- | --- |
+| Intended | [`domains.md`](demo/input/domains.md) - notion.so vs monday.com | 8/5/1 vs 13/1/0; four gaps where monday.com passes and Notion fails; drafts grounded in HTTP 200 fetches | **pass** ([evidence](demo/output/report.md)) |
+| Insufficient evidence | [`insufficient.md`](demo/input/insufficient.md) - unreachable primary | Primary marked UNKNOWN and excluded from comparison rather than called weak; drafts degraded to `[TODO]` stubs naming the reason; competitor still audited normally | **pass** ([evidence](demo/output/evals/case2-insufficient-report.md)) |
+| Failure / exclusion | [`refused.md`](demo/input/refused.md) - `localhost`, `192.168.1.1`, credentialed URL | All three refused at validation, exit code 2, no network request made | **pass** ([evidence](demo/output/evals/case3-refused-stdout.txt)) |
+
+Reusability was checked on a second, unrelated input the same day - animafelix.com against Calm, Headspace and Rootd - with no edits to the skill.
 
 ## How it works
 
-| Time (Bucharest) | What happens |
-| --- | --- |
-| 17:00 | Doors, check-in |
-| 17:30 | Intro, how the Skillathon works, live Codex workflow demo |
-| 18:00 | Build starts. Submissions open. |
-| **20:30** | **Hard cutoff. Submissions close.** Demos start immediately, in random order. |
-| 21:45 | Formidable Builders launch party |
+1. The skill validates the domains file and fixes roles: the first entry is "you" and keeps that role even if it is refused, so a competitor is never silently promoted.
+2. It runs the bundled [`run-audits.mjs`](.agents/skills/agentmarkup-readiness-gap/scripts/run-audits.mjs), which audits every domain in parallel through the public npm package [`@agentmarkup/audit@0.2.5`](https://www.npmjs.com/package/@agentmarkup/audit) and grounds the drafts with two bounded fetches of your own homepage and robots.txt.
+3. The runner writes the report and drafts deterministically, so the same audit results always produce the same report. The agent only reads them and prints a five-line summary.
 
-- Teams of 1–2 people. Build with any agent (Codex, Claude Code, Cursor, anything). The jury runs your submission in the **Codex desktop app**, so the judged path must work in Codex.
-- You submit a **public GitHub repository** created from this template plus a **commit SHA**. The organizer clones that exact commit, opens it in Codex, pastes your seed prompt, and presents it for you in 2 minutes.
-- Submissions are GitHub issues in the submissions repository. Anything filed at or after 20:30:00 is rejected automatically.
-- **Your skill stays public.** After the event, submitted skills are forked into the Formidable Builders GitHub organization (<https://github.com/formidable-oss>) and remain publicly available under the MIT licence. Do not submit anything you are not willing to publish.
+No API keys, no accounts, no MCP servers. One npm package is fetched at run time; everything else is in this repository.
 
-## Start here
+## What it does not do
 
-1. On GitHub, select **Use this template → Create a new repository**. Make it **public**.
-2. Get it onto your laptop and open it in your agent. If you know git: `git clone <your-repo-url>`, then open the folder. If you do not: open your agent in any folder, paste your repository URL, and ask it to clone the repository and set up git for you (it needs `git`, a name and email for commits, and `gh auth login` so pushing works without passwords).
-3. Paste this prompt:
+It measures whether AI crawlers can reach and read a site, which is a prerequisite for AI visibility - not proof of it. It does not test who ChatGPT cites, does not rank anyone, and never turns an unknown into a score. Unreachable targets are reported as UNKNOWN and excluded from comparison. Hostname validation is textual; login-only sites cannot be audited.
 
-```text
-Read AGENTS.md, RULES.md, and .agents/skills/skillathon-guide/SKILL.md, then follow that skill: explain how the GTM Skillathon works and how I will be judged, then help me choose one track, one user, one narrow GTM job, one representative input, one success condition, and one boundary. Keep it small enough to build, test, and submit in two and a half hours.
-```
+## Fixing what it finds
 
-4. Build your skill in `.agents/skills/<skill-name>/SKILL.md`. Test it on the representative input. Record what actually happened.
-5. Fill in `submission.json`, `DEMO.md`, and everything under `demo/`.
-6. Ask your agent to run `$skillathon-submit` (path: `.agents/skills/skillathon-submit/SKILL.md`). It runs the same structure and safety checks the submission system runs, commits, pushes, and files the submission. Submit early; you can resubmit until 20:30 and the latest accepted submission counts.
+- **Sites with a JS build:** `npm i -D @agentmarkup/<vite|astro|next|nuxt>` regenerates and validates these files on every build.
+- **Everything else:** paste [`demo/output/studio-handoff.md`](demo/output/studio-handoff.md) into <https://agentmarkup.dev/studio/>.
 
-## What you must deliver
-
-Everything the jury needs is inside your repository at the submitted commit:
-
-| Artifact | Path | Purpose |
-| --- | --- | --- |
-| Entry skill | `.agents/skills/<skill-name>/SKILL.md` | The one skill the seed prompt invokes. Other skills may support it. |
-| Seed prompt | `demo/seed-prompt.md` | The exact prompt the organizer pastes into Codex. Must invoke `$<skill-name>` and name the input path. |
-| Representative input | `demo/input/<file-or-folder>` | The smallest input that shows the job. Public data only, with source URL and retrieval date. |
-| Fallback output | `demo/output/<file-or-folder>` | A genuine result your skill produced during the event. Shown if the live run stalls. |
-| Evaluations | `demo/evals.md` | Three cases — intended, insufficient evidence, failure/exclusion — with observed results. |
-| Run sheet | `DEMO.md` | What the organizer says and shows during your 2 minutes. |
-| Manifest | `submission.json` | Paths to all of the above, team, track, problem. |
-
-No credentials are available on the jury laptop. If your skill calls an authenticated service, it must degrade gracefully and the fallback output must carry the demo.
-
-## Organizer-provided skills
-
-Two skills ship with this template and are ignored by judging. Do not list them in `submission.json`.
-
-- `$skillathon-guide` — explains the event, the rules, and the judging; helps scope the job; answers questions.
-- `$skillathon-submit` — validates the repository and files the submission.
+Built on [agentmarkup](https://agentmarkup.dev), MIT-licensed open-source tooling by Sebastian Cochinescu at Anima Felix - written after realizing ChatGPT could find his wife's art studio website but could not understand it.
 
 ## Licence
 
-MIT. Keep `LICENSE` as is. By submitting, you agree that your repository is forked into the Formidable Builders GitHub organization and stays public there under this licence.
+MIT, see [`LICENSE`](LICENSE). Event rules and the organizer's template documentation remain in [`RULES.md`](RULES.md) and [`AGENTS.md`](AGENTS.md).
