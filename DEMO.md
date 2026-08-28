@@ -1,63 +1,87 @@
-# Run sheet
+# AgentMarkup demo run sheet
 
-Fallback at ~60 seconds: open [`demo/output/report.md`](demo/output/report.md).
+If the live run takes more than 60 seconds, open [`demo/output/brief.svg`](demo/output/brief.svg). Then open [`demo/output/report.md`](demo/output/report.md).
 
-## Say this - 20 seconds
+## Open — 15 seconds
 
-**Team:** agentmarkup (Sebastian Cochinescu, Anima Felix; with pax-k)
+Say:
 
-**Track:** ai-search-optimization
+> A growth marketer can see that AI access is weak, but cannot give the web team defensible proof, the correct owner, or a safe next action. AgentMarkup turns one domain file into a live field report: same-URL request evidence, matched competitor gaps, an owner queue, and review-only fix artifacts.
 
-**Who has the problem:** a founder or marketer at a B2B SaaS company whose site AI assistants keep missing.
+The boundary is important: this is crawl-readiness evidence. It does not claim assistant citations, ranking, traffic, or access from verified crawler IP ranges.
 
-**The job this skill does:** it audits your website and a competitor's live, identifying itself as each AI crawler, and returns an evidence-backed gap report plus draft fixes.
+## Run — about 15 seconds
 
-**Boundary - what it never does:** it never invents a score and never claims who ChatGPT cites or how anyone ranks.
+1. Open Codex at the repository root.
+2. Paste the contents of [`demo/seed-prompt.md`](demo/seed-prompt.md).
+3. If Codex asks for network access, allow this run once.
+4. Expect the live runner to finish in about 10 seconds. It writes the report, visual, fix pack, receipts, review artifacts, raw audits, and run summary under `out/`.
+5. At 60 seconds, stop waiting and use the saved fallback.
 
-Say: "When someone asks ChatGPT for help with anxiety, ChatGPT has to be able to read the site first. We are checking four apps in that category, live - and three of them answer a browser while slamming the door on ChatGPT's crawler. Nobody decided that; a bot-protection rule did."
+While it runs, say:
 
-## Run this - 60 seconds
+> The first domain is the subject. The second is the peer. The skill sends one browser-control request and named crawler User-Agent requests to the same public page. It compares only like-for-like capabilities. An unknown stays unknown, and an unreported check stays neutral.
 
-1. Codex is open at the repository root.
-2. Paste [`demo/seed-prompt.md`](demo/seed-prompt.md).
-3. **If Codex says `NO NETWORK` and asks to allow the command, click "Allow once".** That is the expected path.
-4. Watch for: four files written to `out/` and a five-line summary printed.
-5. If nothing visible after 60 seconds, open the fallback: [`demo/output/report.md`](demo/output/report.md).
+## Show — 60 seconds
 
-While it runs, say: "The first website is treated as ours, Calm, and the rest as its competitors - Rootd, Wysa, and animafelix.com, which is our own site, disclosed in the input file. The skill visits both sites live while identifying itself as GPTBot, ClaudeBot, PerplexityBot and Google-Extended, then compares their responses check by check. Every claim is backed by the server's raw answer. It also drafts the fixes. This grew from agentmarkup, open-source tooling Sebastian built after realizing ChatGPT could find his wife's art studio website but could not understand it."
+### 1. Start with the proof sheet
 
-## Show this - 25 seconds
+Open `out/brief.svg`.
 
-Open `out/report.md`. Point to **Top actions**, then the **AI readiness matrix** - every check as a row, every site as a column, green ticks against warnings and one red error - then the colour-coded scoreboard (red lines are sites refusing an AI crawler, green is one that answers all of them), then the triaged fix plan.
+Point to these three parts:
 
-**Result:** a gap report that opens with the top three actions and who owns each - **read the two passing-check totals off the live screen** - plus three ready-to-review drafts: `out/llms.txt`, `out/robots-patch.txt`, `out/studio-handoff.md`.
+- **Outcome:** Calm has 1 crawler User-Agent identity that matched the browser control, with 8 review actions remaining. This is a count, not a readiness score.
+- **Same URL, two identities:** the browser control received HTTP 200, while the GPTBot User-Agent received HTTP 403.
+- **First actions:** each card has a severity, evidence receipt, owner, and exact recheck condition.
 
-Say: "Look at the matrix - one column per company, one row per check, every cell a real response. Three columns are 403 to ChatGPT, Claude and Perplexity while a browser gets 200, seconds apart from the same machine. That is most of a category being invisible to AI assistants without knowing it. The column that answers everything is a small studio in Bucharest running this tooling."
+Say:
 
-**Evidence:** every finding carries the raw server response and a fetched-at timestamp; the Limitations section states what was not tested.
+> This is the signature moment: one URL, two request identities, two observed responses. The visual does not hide the distinction between the overall site result and this specific crawler warning.
 
-**Fallback output was produced:** 2026-08-28 during the build window, by running this same seed prompt in Codex from a clean clone.
+### 2. Show why the peer comparison is useful
 
-**Limitation, say it out loud:** "This measures whether AI crawlers can reach and read a site - a prerequisite for AI visibility. It does not claim to know who ChatGPT cites, and it never turns an unknown into a score."
+Open `out/report.md`. Go to **Machine-readable surface**, then **Crawl-access scoreboard**, then **Matched peer differences**. The diff block shows refused crawler identities in red and the fully readable reference implementation in green.
 
-## Evals - 10 seconds
+Say:
 
-| Case | Result | Where |
-| --- | --- | --- |
-| Intended | pass - full gap report with grounded drafts | [`demo/evals.md`](demo/evals.md) |
-| Insufficient evidence | pass - primary marked UNKNOWN, drafts reduced to `[TODO]` stubs | [`demo/evals.md`](demo/evals.md) |
-| Failure / exclusion | pass - localhost, private IP and credentialed URL all refused, nothing fetched | [`demo/evals.md`](demo/evals.md) |
+> The peers produced nine matched differences across seven capabilities. Animafelix passed the four crawler-access capabilities and llms.txt where Calm warned; Wysa and Animafelix also supplied matched proof for structured data and metadata. These are like-for-like differences, not a generic checklist opinion.
 
-## Close - 5 seconds
+Show the first action. Calm returned 200 to the browser control and 403 to GPTBot, while Animafelix passed the same capability. Then open `out/llms.txt`.
 
-**Reusable on:** any file of public domains, no edits - same evening we ran it on notion.so versus monday.com, a completely different category, unchanged. It scales to four sites in the same 13-second run.
+Say:
 
-**Material limitation:** crawl readiness is a prerequisite for AI visibility, not proof of it. The report says plainly which findings agentmarkup can fix, which need a human content change, which are server or bot-protection settings, and that third-party authority is not measurable here at all.
+> Calm had no reachable llms.txt. The skill grounded only the title and description from the captured homepage and left the uncaptured page list as TODO instead of inventing it.
 
-Say: "You leave with measured gaps, evidence, and the fixes themselves: developers install the npm packages so these files regenerate on every build; everyone else pastes the Studio handoff into agentmarkup.dev/studio."
+Open `out/robots-patch.txt`.
+
+Say:
+
+> The robots finding needs a product-policy choice. The skill says POLICY INPUT REQUIRED. It does not invent consent for training.
+
+Nothing in the review pack is applied or published.
+
+## Evidence and fallback — 15 seconds
+
+The saved intended run is in [`demo/output/`](demo/output/). It was produced by this runner on 2026-08-28 from Calm, Rootd, Wysa, and Animafelix. Its run summary records the package pin, timing, observed counts, URLs, and grounding responses.
+
+The three recorded evaluations are in [`demo/evals.md`](demo/evals.md):
+
+| Case | Verified result |
+| --- | --- |
+| Intended | Live report, valid SVG, 9 matched peer differences, 8 owner actions |
+| Insufficient evidence | Subject UNKNOWN, zero gaps, zero actions, TODO-only artifacts |
+| Refused input | Localhost, private IP, and credentialed URL refused before the audit |
+
+## Close — 10 seconds
+
+Say:
+
+> AgentMarkup turns a vague AI-readiness question into a reviewable engineering handoff: observed response, peer proof, owner, safe draft, and done-when check. It is reusable on one subject and up to three public peers without changing the skill.
 
 ## If a judge asks
 
-- **Why not just ask ChatGPT?** Asking ChatGPT "can AI read my site?" gets an opinion. This dresses up as each AI crawler and finds out, with the server's answer beside every claim.
-- **Is this a score?** No. Checks, gaps, evidence. An unknown stays unknown.
-- **Does it work on any site?** Any public site the runner can reach. Blocked crawler requests are reported as evidence, not guessed at.
+- **Are these verified crawler visits?** No. They are simulated User-Agent requests from the runner host. The report says that verified crawler IP behavior was not tested.
+- **Why is there no score?** The auditor does not emit one fixed shared denominator. UNKNOWN and NOT_REPORTED remain neutral, so the skill does not invent a percentage.
+- **Why use a competitor?** A gap is promoted only when the subject warns or fails and the same capability passes for an eligible peer.
+- **Does it make changes?** No. It creates review-only artifacts. A human must approve policy and publishing actions.
+- **What remains unverified?** Citations, ranking, traffic, third-party authority, verified crawler networks, DNS rebinding, and behavior after the recorded live snapshot.

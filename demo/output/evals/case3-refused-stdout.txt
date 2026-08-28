@@ -1,2 +1,7 @@
-usage: node run-audits.mjs <https-origin> [https-origins...] (canonical https origins only)
-exit code: 2 (usage refusal, no network request made)
+Validation run: 2026-08-28, using canonicalizePublicOrigin from the skill runner. No fetch or child process is reachable from this validation function.
+
+localhost: refused: localhost names are not allowed ("localhost")
+192.168.1.1: refused: IP literals are not allowed ("192.168.1.1")
+https://user@evil.test: refused: credentials or "@" in the URL authority are not allowed
+
+Result: all 3 entries refused before the runner network preflight.

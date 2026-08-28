@@ -1,7 +1,7 @@
 {
   "url": "https://calm.com",
   "finalUrl": "https://www.calm.com/",
-  "fetchedAt": "2026-08-28T17:21:07.100Z",
+  "fetchedAt": "2026-08-28T17:24:19.467Z",
   "findings": [
     {
       "code": "crawler.ua-differential-block",

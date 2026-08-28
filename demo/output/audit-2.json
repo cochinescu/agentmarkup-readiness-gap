@@ -1,7 +1,7 @@
 {
   "url": "https://wysa.com",
   "finalUrl": "https://www.wysa.com/",
-  "fetchedAt": "2026-08-28T17:21:07.067Z",
+  "fetchedAt": "2026-08-28T17:24:19.262Z",
   "findings": [
     {
       "code": "crawler.ua-differential-block",

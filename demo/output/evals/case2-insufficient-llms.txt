@@ -1,5 +1,4 @@
-# [TODO site name]
+# [TODO]
 
-> [TODO one-line site description]
-
-# [TODO] stub only: primary audit UNKNOWN (no browser baseline (crawler.control-failed)) — no site facts were derivable. Generated 2026-08-28T17:21:03.445Z.
+# [TODO] Primary evidence is unavailable (no browser baseline (crawler.control-failed)).
+# No llms.txt replacement was derived. Generated 2026-08-28T17:05:30.118Z.
