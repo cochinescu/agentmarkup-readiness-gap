@@ -1,7 +1,11 @@
 {
   "url": "https://calm.com",
   "finalUrl": "https://www.calm.com/",
+<<<<<<< HEAD
   "fetchedAt": "2026-08-28T17:25:25.966Z",
+=======
+  "fetchedAt": "2026-08-28T17:24:19.467Z",
+>>>>>>> pax-pr
   "findings": [
     {
       "code": "crawler.ua-differential-block",

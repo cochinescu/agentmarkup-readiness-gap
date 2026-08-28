@@ -1,47 +1,73 @@
-# AgentMarkup readiness gap
+# AgentMarkup field report
 
-Generated 2026-08-28T17:21:03.445Z from live audits. "You" = https://nonexistent-zz9x7q-skillathon.invalid -> https://nonexistent-zz9x7q-skillathon.invalid/; competitors: https://headspace.com.
+Generated 2026-08-28T17:05:30.118Z from @agentmarkup/audit@0.2.5. Subject: https://nonexistent-zz9x7q-skillathon.example.com. Compared with: https://monday.com.
 
-## AI readiness matrix
+## Outcome
 
-| Check | nonexistent-zz9x7q-skillathon.invalid | headspace.com |
+**No access conclusion: no browser baseline (crawler.control-failed)**
+
+Observed subject findings: 0 PASS, 4 WARN, 0 ERROR, 0 UNKNOWN, 4 total. A capability with no emitted finding is NOT_REPORTED. No shared denominator or readiness score is calculated.
+
+![AgentMarkup field report with paired request proof and first review actions](brief.svg)
+
+## Live proof: same URL, two request identities
+
+| Request identity | Observed response | Evidence receipt |
 | --- | --- | --- |
-| GPTBot (ChatGPT) can fetch the page | UNKNOWN | ✅ 200 |
-| OAI-SearchBot can fetch the page | UNKNOWN | ✅ 200 |
-| ClaudeBot (Claude) can fetch the page | UNKNOWN | ✅ 200 |
-| PerplexityBot can fetch the page | UNKNOWN | ✅ 200 |
-| Google-Extended can fetch the page | UNKNOWN | ✅ 200 |
-| llms.txt published and valid | UNKNOWN | ✅ |
-| llms.txt linked from the homepage | UNKNOWN | ⚠️ |
-| JSON-LD structured data | UNKNOWN | ✅ |
-| Content-Signal policy in robots.txt | UNKNOWN | ⚠️ |
-| robots.txt allows AI crawlers | UNKNOWN | ✅ |
-| Sitemap published | UNKNOWN | ✅ |
-| Core page metadata complete | UNKNOWN | ✅ |
-| Content in server-rendered HTML | UNKNOWN | ✅ |
-| Missing paths return a real 404 | UNKNOWN | ✅ |
+| Browser control | UNKNOWN | NOT_REPORTED |
+| crawler identity User-Agent | UNKNOWN | NOT_REPORTED |
 
-✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.
+No conclusion — the browser control was unavailable.
 
-## Coverage
-```diff
-! nonexistent-zz9x7q-skillathon.invalid  ??????????????  UNKNOWN - not auditable
-+ headspace.com                          ████████████░░  12/14  readable by every crawler tested
-```
+These are simulated User-Agent requests from this runner. Verified crawler IP access was not tested.
 
-- https://nonexistent-zz9x7q-skillathon.invalid: UNKNOWN (no browser baseline (crawler.control-failed)) — excluded from comparison, not a weakness
-- https://headspace.com: 12 pass / 2 warn / 0 error (fetched 2026-08-28T17:20:53.353Z)
-- Grounding: homepage fetch-failed — NOT usable as evidence; robots.txt fetch-failed — NOT usable as evidence
+## Machine-readable surface
 
-How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
+| Capability | nonexistent-zz9x7q-skillathon.example.com | monday.com |
+| --- | --- | --- |
+| GPTBot User-Agent access | UNKNOWN | PASS (E-35c57071a184) |
+| OAI-SearchBot User-Agent access | UNKNOWN | PASS (E-3a6824315911) |
+| ClaudeBot User-Agent access | UNKNOWN | PASS (E-b8d38f968983) |
+| PerplexityBot User-Agent access | UNKNOWN | PASS (E-deeda7915245) |
+| Google-Extended User-Agent access | UNKNOWN | PASS (E-fca50e040f4d) |
+| Content without JavaScript | UNKNOWN | PASS (E-4621f5424674) |
+| robots.txt crawler policy | UNKNOWN | PASS (E-a3d801864098) |
+| Content-Signal policy | UNKNOWN | PASS (E-de9039fdcffd) |
+| llms.txt manifest | UNKNOWN | PASS (E-03bb6a7d65a8) |
+| llms.txt homepage discovery | UNKNOWN | WARN (E-497e3df14aa6) |
+| JSON-LD structured data | UNKNOWN | PASS (E-cf6a106f3ce6) |
+| Markdown alternate | UNKNOWN | NOT_REPORTED |
+| Sitemap discovery | UNKNOWN | PASS (E-7100b74ea517) |
+| Core page metadata | UNKNOWN | PASS (E-44d11b97d797) |
+| Missing-path HTTP behavior | UNKNOWN | PASS (E-64c80bf750e9) |
 
-## https://headspace.com warn/error findings
-- WARN — No Content-Signal policy in robots.txt
-- WARN — llms.txt is not linked from the homepage
+## Matched peer differences
 
-## Fix exits
-- JS build: `npm i -D @agentmarkup/<vite|astro|next|nuxt>` — regenerates and validates these files on every build.
-- Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
+No comparable capability was WARN or ERROR for the subject while explicitly PASS for a peer.
 
-## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 1. Grounding for "you" failed or was unusable, so drafts are [TODO] stubs. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T17:21:03.445Z.
+## Action queue
+
+UNKNOWN — no browser baseline (crawler.control-failed)
+
+## Generated review pack
+
+- `brief.svg` — one-page stage visual; `report.md` remains the text source of truth.
+- `fix-pack.md` — evidence-to-owner-to-review-action-to-recheck handoff.
+- `llms.txt` — TODO or partial draft.
+- `robots-patch.txt` — TODO.
+- `studio-handoff.md` — self-contained handoff; it does not rely on access to local files.
+
+## Evidence and coverage
+
+- https://nonexistent-zz9x7q-skillathon.example.com: UNKNOWN; 0 PASS / 4 WARN / 0 ERROR / 0 UNKNOWN / 4 observed; fetched 2026-08-28T17:05:23.770Z; raw audit-0.json; reason: no browser baseline (crawler.control-failed).
+- https://monday.com: OK; 13 PASS / 1 WARN / 0 ERROR / 0 UNKNOWN / 14 observed; fetched 2026-08-28T17:05:23.668Z; raw audit-1.json.
+- Subject grounding: homepage fetch-failed — unavailable; robots.txt fetch-failed — unavailable.
+
+Full evidence receipts are in `evidence.json`; raw audit findings remain in `audit-*.json`.
+
+## What this proves — and what it does not
+
+- **Measured:** public responses observed under a browser User-Agent and named crawler User-Agent strings; reported machine-readable signals; matched peer differences.
+- **Not measured:** assistant citations, rankings, traffic, third-party authority, or access from verified crawler IP ranges.
+- **Unknown:** 1 domain(s); NOT_REPORTED cells remain neutral and are excluded from matched gaps.
+- Hostname validation is textual only. Findings are a live snapshot and can change after this run.

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Append to your existing robots.txt — this block preserves existing directives.
 # Built against your live robots.txt (HTTP 200).
 # Review before publishing. Generated 2026-08-28T17:25:35.597Z from live audit of https://calm.com.
@@ -12,3 +13,10 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 # END agentmarkup AI crawlers
+=======
+# POLICY INPUT REQUIRED
+# The audit found a robots or Content-Signal gap for https://calm.com.
+# [TODO] The site owner must choose search, AI-input, and training policy before a patch can be generated.
+# This draft deliberately does not select a training-consent value.
+# Generated 2026-08-28T17:24:28.014Z.
+>>>>>>> pax-pr

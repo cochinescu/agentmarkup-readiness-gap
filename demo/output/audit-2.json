@@ -1,7 +1,11 @@
 {
   "url": "https://wysa.com",
   "finalUrl": "https://www.wysa.com/",
+<<<<<<< HEAD
   "fetchedAt": "2026-08-28T17:25:25.963Z",
+=======
+  "fetchedAt": "2026-08-28T17:24:19.262Z",
+>>>>>>> pax-pr
   "findings": [
     {
       "code": "crawler.ua-differential-block",

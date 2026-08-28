@@ -3,6 +3,10 @@
 > Calm is the #1 app for sleep and meditation. Join the millions experiencing better sleep, lower stress, and less anxiety.
 
 ## Pages
-- [TODO curated key pages with one-line descriptions]
+- [TODO curated key pages with one-line descriptions; candidates were not fetched]
 
+<<<<<<< HEAD
 # Draft generated 2026-08-28T17:25:35.597Z by agentmarkup-readiness-gap from the live homepage of https://calm.com (HTTP 200); review before publishing
+=======
+# Draft generated 2026-08-28T17:24:28.014Z from the live homepage of https://calm.com (HTTP 200); review before publishing.
+>>>>>>> pax-pr

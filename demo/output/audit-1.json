@@ -1,7 +1,11 @@
 {
   "url": "https://rootd.io",
   "finalUrl": "https://www.rootd.io/",
+<<<<<<< HEAD
   "fetchedAt": "2026-08-28T17:25:25.976Z",
+=======
+  "fetchedAt": "2026-08-28T17:24:19.246Z",
+>>>>>>> pax-pr
   "findings": [
     {
       "code": "crawler.ua-differential-block",

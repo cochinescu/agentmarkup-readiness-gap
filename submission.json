@@ -5,10 +5,10 @@
     "members": ["cochinescu", "pax-k"]
   },
   "track": "ai-search-optimization",
-  "problem": "A B2B SaaS founder or marketer cannot tell whether the AI crawlers behind ChatGPT, Claude and Perplexity can actually reach and read their website while a competitor's is fully readable; this skill audits both live as each crawler and returns an evidence-backed gap report plus draft llms.txt, robots.txt patch and Studio handoff.",
+  "problem": "A B2B SaaS growth marketer cannot give the web team defensible evidence about where the site's machine-readable path differs from a competitor; this skill compares live browser-control and simulated crawler User-Agent responses, then returns a one-page field report with matched evidence, correct ownership, review-only actions, and explicit recheck conditions.",
   "entry_skill": ".agents/skills/agentmarkup-readiness-gap/SKILL.md",
   "skills": [
-    { "path": ".agents/skills/agentmarkup-readiness-gap/SKILL.md", "role": "Audit your site and competitors as each AI crawler, then report the readiness gap with evidence and draft the fixes" }
+    { "path": ".agents/skills/agentmarkup-readiness-gap/SKILL.md", "role": "Compare a site and competitor through browser-control and crawler User-Agent requests, then produce a proof-backed remediation handoff" }
   ],
   "seed_prompt": "demo/seed-prompt.md",
   "input": "demo/input/domains.md",

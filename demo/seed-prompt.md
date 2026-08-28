@@ -1,1 +1,1 @@
-Run $agentmarkup-readiness-gap on demo/input/domains.md and give me a 5-line summary of the biggest gaps; the full report and fix drafts will be in out/.
+Run $agentmarkup-readiness-gap on demo/input/domains.md and give me a five-line summary of the outcome and biggest matched gaps. Generate the field report, one-page visual, review-only fix pack, and evidence receipts under out/.
