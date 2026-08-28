@@ -1,6 +1,6 @@
 # AgentMarkup readiness gap
 
-Generated 2026-08-28T16:59:26.754Z from live audits. "You" = https://calm.com -> https://www.calm.com/; competitors: https://rootd.io, https://wysa.com, https://animafelix.com.
+Generated 2026-08-28T17:21:16.010Z from live audits. "You" = https://calm.com -> https://www.calm.com/; competitors: https://rootd.io, https://wysa.com, https://animafelix.com.
 
 ## Top actions
 
@@ -21,27 +21,27 @@ Generated 2026-08-28T16:59:26.754Z from live audits. "You" = https://calm.com ->
 | Google-Extended can fetch the page | ✅ 200 | ✅ 200 | ✅ 200 | ✅ 200 |
 | llms.txt published and valid | ⚠️ | ⚠️ | ⚠️ | ✅ |
 | JSON-LD structured data | ⚠️ | ⚠️ | ✅ | ✅ |
-| Content-Signal policy in robots.txt | ⚠️ | ⚠️ | – | ⚠️ |
-| robots.txt allows AI crawlers | ✅ | ✅ | – | ✅ |
-| Sitemap published | ✅ | ✅ | ⚠️ | ✅ |
+| Content-Signal policy in robots.txt | ⚠️ | ⚠️ | ⚠️ | ⚠️ |
+| robots.txt allows AI crawlers | ✅ | ✅ | ✅ | ✅ |
+| Sitemap published | ✅ | ✅ | ✅ | ✅ |
 | Core page metadata complete | ⚠️ | ⚠️ | ✅ | ✅ |
 | Content in server-rendered HTML | ✅ | ✅ | ✅ | ✅ |
-| Missing paths return a real 404 | ✅ | ✅ | ⚠️ | ✅ |
+| Missing paths return a real 404 | ✅ | ✅ | ✅ | ✅ |
 
 ✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.
 
 ## Coverage
-```
-calm.com        █████░░░░░░░░░  5/14 checks passed
-rootd.io        █████░░░░░░░░░  5/14 checks passed
-wysa.com        ████░░░░░░░░░░  4/14 checks passed
-animafelix.com  █████████████░  13/14 checks passed
+```diff
+- calm.com        █████░░░░░░░░░   5/14  4 AI crawlers refused
+- rootd.io        █████░░░░░░░░░   5/14  4 AI crawlers refused
+- wysa.com        ███████░░░░░░░   7/14  4 AI crawlers refused
++ animafelix.com  █████████████░  13/14  readable by every crawler tested
 ```
 
-- https://calm.com: 5 pass / 8 warn / 0 error (fetched 2026-08-28T16:59:16.914Z)
-- https://rootd.io: 5 pass / 8 warn / 0 error (fetched 2026-08-28T16:59:16.880Z)
-- https://wysa.com: 4 pass / 8 warn / 0 error (fetched 2026-08-28T16:59:16.880Z)
-- https://animafelix.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T16:59:16.915Z)
+- https://calm.com: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:21:07.100Z)
+- https://rootd.io: 5 pass / 8 warn / 0 error (fetched 2026-08-28T17:21:07.058Z)
+- https://wysa.com: 7 pass / 6 warn / 0 error (fetched 2026-08-28T17:21:07.067Z)
+- https://animafelix.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T17:21:07.098Z)
 - Grounding: homepage 200 (565142 bytes, final https://www.calm.com/); robots.txt 200
 
 How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
@@ -85,11 +85,8 @@ How to read the evidence: each site was requested twice, once under an AI crawle
   Evidence: claudebot → status=403; browser → status=200
 - WARN — Perplexity perplexitybot is blocked from a generic IP
   Evidence: perplexitybot → status=403; browser → status=200
-- WARN — No robots.txt found
+- WARN — No Content-Signal policy in robots.txt
 - WARN — No llms.txt found
-- WARN — No sitemap.xml found
-- WARN — Missing paths answer 429, not 404
-  Evidence: GET https://wysa.com/agentmarkup-probe-404-does-not-exist-9f3a2c -> 429
 
 ## https://animafelix.com warn/error findings
 - WARN — No Content-Signal policy in robots.txt
@@ -98,7 +95,7 @@ How to read the evidence: each site was requested twice, once under an AI crawle
 Versus https://rootd.io (5 vs 5 passing):
 - No check where this competitor passes and you fail.
 
-Versus https://wysa.com (5 vs 4 passing):
+Versus https://wysa.com (5 vs 7 passing):
 - They pass this check, you don't: No JSON-LD structured data
 - They pass this check, you don't: Core page metadata is incomplete
 
@@ -130,4 +127,4 @@ Versus https://animafelix.com (5 vs 13 passing):
 - Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
 
 ## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T16:59:26.754Z.
+Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T17:21:16.010Z.

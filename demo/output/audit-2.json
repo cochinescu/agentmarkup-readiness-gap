@@ -1,7 +1,7 @@
 {
   "url": "https://wysa.com",
   "finalUrl": "https://www.wysa.com/",
-  "fetchedAt": "2026-08-28T16:59:16.880Z",
+  "fetchedAt": "2026-08-28T17:21:07.067Z",
   "findings": [
     {
       "code": "crawler.ua-differential-block",
@@ -50,11 +50,17 @@
       "evidence": "raw text length=9111"
     },
     {
-      "code": "robots.missing",
+      "code": "robots.crawlers-allowed",
+      "level": "pass",
+      "title": "robots.txt does not block the expected AI crawlers",
+      "detail": "None of the checked AI crawlers are shadowed by a wildcard disallow."
+    },
+    {
+      "code": "robots.no-content-signal",
       "level": "warn",
-      "title": "No robots.txt found",
-      "detail": "No reachable robots.txt. Crawlers assume full access, but you also cannot express AI-specific or Content-Signal preferences.",
-      "fix": "Generate robots.txt with agentmarkup (aiCrawlers + contentSignalHeaders)."
+      "title": "No Content-Signal policy in robots.txt",
+      "detail": "Content-Signal in robots.txt is the canonical place to state training/search/ai-input preferences. It may still be set as an HTTP header, which fewer tools read.",
+      "fix": "Enable agentmarkup contentSignalHeaders so Content-Signal is written into robots.txt."
     },
     {
       "code": "llms.missing",
@@ -70,11 +76,10 @@
       "detail": "1 JSON-LD block(s) found and parseable."
     },
     {
-      "code": "sitemap.missing",
-      "level": "warn",
-      "title": "No sitemap.xml found",
-      "detail": "No reachable sitemap.xml. A sitemap helps crawlers and AI systems discover pages they would not reach by following links.",
-      "fix": "Generate a sitemap.xml and reference it from robots.txt."
+      "code": "sitemap.present",
+      "level": "pass",
+      "title": "Sitemap found",
+      "detail": "A sitemap is declared in robots.txt, which helps crawlers and AI systems discover all of your pages."
     },
     {
       "code": "meta.complete",
@@ -83,20 +88,19 @@
       "detail": "The page has a title, a meta description, and a canonical link, which help AI systems and search attribute the page."
     },
     {
-      "code": "notfound.non-404",
-      "level": "warn",
-      "title": "Missing paths answer 429, not 404",
-      "detail": "A path that does not exist did not return 404 or 410. Agents use the status code to decide whether a resource exists, so anything else is ambiguous.",
-      "evidence": "GET https://wysa.com/agentmarkup-probe-404-does-not-exist-9f3a2c -> 429",
-      "fix": "Return 404 (or 410) for unknown paths."
+      "code": "notfound.ok",
+      "level": "pass",
+      "title": "Missing paths return a real 404",
+      "detail": "A path that does not exist answered with a real not-found status, so an agent can tell a missing resource from a real one.",
+      "evidence": "GET https://wysa.com/agentmarkup-probe-404-does-not-exist-9f3a2c -> 404"
     }
   ],
   "summary": {
-    "pass": 4,
-    "warn": 8,
+    "pass": 7,
+    "warn": 6,
     "error": 0,
-    "checks": 12,
-    "passed": 4,
+    "checks": 13,
+    "passed": 7,
     "worst": "warn"
   }
 }

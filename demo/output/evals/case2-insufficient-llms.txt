@@ -2,4 +2,4 @@
 
 > [TODO one-line site description]
 
-# [TODO] stub only: primary audit UNKNOWN (no browser baseline (crawler.control-failed)) — no site facts were derivable. Generated 2026-08-28T16:43:53.693Z.
+# [TODO] stub only: primary audit UNKNOWN (no browser baseline (crawler.control-failed)) — no site facts were derivable. Generated 2026-08-28T17:21:03.445Z.

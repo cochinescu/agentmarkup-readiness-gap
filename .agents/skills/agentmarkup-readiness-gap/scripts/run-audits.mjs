@@ -203,12 +203,18 @@ lines.push(`## Coverage`);
 const bar = (n, total) => '█'.repeat(Math.max(0, n)) + '░'.repeat(Math.max(0, total - n));
 const maxChecks = Math.max(...audits.filter((a) => a.status === 'ok').map((a) => a.counts.pass + a.counts.warn + a.counts.error), 1);
 if (audits.some((a) => a.status === 'ok')) {
-  lines.push('```');
+  // Rendered as a diff block so viewers colour the lines: green for sites an AI crawler can
+  // read, red for sites refusing one. The marker is derived from observed results only.
+  const pad = Math.max(...audits.map((x) => new URL(x.url).hostname.length));
+  const blockedCount = (a) => (a.json?.findings || []).filter((f) => String(f.code ?? '').startsWith('crawler.') && f.level !== 'pass').length;
+  lines.push('```diff');
   for (const a of audits) {
-    const host = new URL(a.url).hostname.padEnd(Math.max(...audits.map((x) => new URL(x.url).hostname.length)));
-    lines.push(a.status === 'ok'
-      ? `${host}  ${bar(a.counts.pass, maxChecks)}  ${a.counts.pass}/${maxChecks} checks passed`
-      : `${host}  ${'?'.repeat(maxChecks)}  UNKNOWN`);
+    const host = new URL(a.url).hostname.padEnd(pad);
+    if (a.status !== 'ok') { lines.push(`! ${host}  ${'?'.repeat(maxChecks)}  UNKNOWN - not auditable`); continue; }
+    const blocked = blockedCount(a);
+    const marker = blocked > 0 || a.counts.error > 0 ? '-' : a.counts.warn > 2 ? '!' : '+';
+    const note = blocked > 0 ? `${blocked} AI crawler${blocked > 1 ? 's' : ''} refused` : a.counts.error > 0 ? 'error-level finding' : a.counts.warn > 2 ? 'gaps to close' : 'readable by every crawler tested';
+    lines.push(`${marker} ${host}  ${bar(a.counts.pass, maxChecks)}  ${String(a.counts.pass).padStart(2)}/${maxChecks}  ${note}`);
   }
   lines.push('```', ``);
 }

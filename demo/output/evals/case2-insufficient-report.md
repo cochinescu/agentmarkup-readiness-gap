@@ -1,6 +1,6 @@
 # AgentMarkup readiness gap
 
-Generated 2026-08-28T16:43:53.693Z from live audits. "You" = https://nonexistent-zz9x7q-skillathon.invalid -> https://nonexistent-zz9x7q-skillathon.invalid/; competitors: https://headspace.com.
+Generated 2026-08-28T17:21:03.445Z from live audits. "You" = https://nonexistent-zz9x7q-skillathon.invalid -> https://nonexistent-zz9x7q-skillathon.invalid/; competitors: https://headspace.com.
 
 ## AI readiness matrix
 
@@ -24,13 +24,13 @@ Generated 2026-08-28T16:43:53.693Z from live audits. "You" = https://nonexistent
 ✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.
 
 ## Coverage
-```
-nonexistent-zz9x7q-skillathon.invalid  ??????????????  UNKNOWN
-headspace.com                          ████████████░░  12/14 checks passed
+```diff
+! nonexistent-zz9x7q-skillathon.invalid  ??????????????  UNKNOWN - not auditable
++ headspace.com                          ████████████░░  12/14  readable by every crawler tested
 ```
 
 - https://nonexistent-zz9x7q-skillathon.invalid: UNKNOWN (no browser baseline (crawler.control-failed)) — excluded from comparison, not a weakness
-- https://headspace.com: 12 pass / 2 warn / 0 error (fetched 2026-08-28T16:43:44.319Z)
+- https://headspace.com: 12 pass / 2 warn / 0 error (fetched 2026-08-28T17:20:53.353Z)
 - Grounding: homepage fetch-failed — NOT usable as evidence; robots.txt fetch-failed — NOT usable as evidence
 
 How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
@@ -44,4 +44,4 @@ How to read the evidence: each site was requested twice, once under an AI crawle
 - Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
 
 ## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 1. Grounding for "you" failed or was unusable, so drafts are [TODO] stubs. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T16:43:53.693Z.
+Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 1. Grounding for "you" failed or was unusable, so drafts are [TODO] stubs. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T17:21:03.445Z.

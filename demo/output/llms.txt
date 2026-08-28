@@ -5,4 +5,4 @@
 ## Pages
 - [TODO curated key pages with one-line descriptions]
 
-# Draft generated 2026-08-28T16:59:26.754Z by agentmarkup-readiness-gap from the live homepage of https://calm.com (HTTP 200); review before publishing
+# Draft generated 2026-08-28T17:21:16.010Z by agentmarkup-readiness-gap from the live homepage of https://calm.com (HTTP 200); review before publishing

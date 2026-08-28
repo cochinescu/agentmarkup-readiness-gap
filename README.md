@@ -30,11 +30,11 @@ Real output from `demo/input/domains.md`, committed in [`demo/output/report.md`]
 | Content in server-rendered HTML | ✅ | ✅ | ✅ | ✅ |
 | Missing paths return a real 404 | ✅ | ✅ | ⚠️ | ✅ |
 
-```
-calm.com        █████░░░░░░░░░  5/14 checks passed
-rootd.io        █████░░░░░░░░░  5/14 checks passed
-wysa.com        ████░░░░░░░░░░  4/14 checks passed
-animafelix.com  █████████████░  13/14 checks passed
+```diff
+- calm.com        █████░░░░░░░░░   5/14  4 AI crawlers refused
+- rootd.io        █████░░░░░░░░░   5/14  4 AI crawlers refused
+- wysa.com        ███████░░░░░░░   7/14  4 AI crawlers refused
++ animafelix.com  █████████████░  13/14  readable by every crawler tested
 ```
 
 Every cell comes from an observed response. Three of the four apps return 403 to ChatGPT's, Claude's and Perplexity's crawlers while returning 200 to a browser from the same machine seconds apart. The one that answers every crawler is animafelix.com - our own site, disclosed as such in the input file, and the reference implementation for the tooling this skill wraps.
