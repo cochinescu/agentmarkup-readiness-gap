@@ -14,29 +14,30 @@ Given a file with your domain and up to three competitors, `$agentmarkup-readine
 
 Real output from `demo/input/domains.md`, committed in [`demo/output/report.md`](demo/output/report.md):
 
-| Check | calm.com | headspace.com |
-| --- | --- | --- |
-| GPTBot (ChatGPT) can fetch the page | ⚠️ 403 | ✅ 200 |
-| OAI-SearchBot can fetch the page | ⚠️ 403 | ✅ 200 |
-| ClaudeBot (Claude) can fetch the page | ⚠️ 403 | ✅ 200 |
-| PerplexityBot can fetch the page | ⚠️ 403 | ✅ 200 |
-| Google-Extended can fetch the page | ✅ 200 | ✅ 200 |
-| llms.txt published and valid | ⚠️ | ✅ |
-| llms.txt linked from the homepage | – | ⚠️ |
-| JSON-LD structured data | ⚠️ | ✅ |
-| Content-Signal policy in robots.txt | ⚠️ | ⚠️ |
-| robots.txt allows AI crawlers | ✅ | ✅ |
-| Sitemap published | ✅ | ✅ |
-| Core page metadata complete | ⚠️ | ✅ |
-| Content in server-rendered HTML | ✅ | ✅ |
-| Missing paths return a real 404 | ✅ | ✅ |
+| Check | calm.com | rootd.io | wysa.com | animafelix.com |
+| --- | --- | --- | --- | --- |
+| GPTBot (ChatGPT) can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
+| OAI-SearchBot can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
+| ClaudeBot (Claude) can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
+| PerplexityBot can fetch the page | ⚠️ 403 | ⚠️ 403 | ⚠️ 403 | ✅ 200 |
+| Google-Extended can fetch the page | ✅ 200 | ✅ 200 | ✅ 200 | ✅ 200 |
+| llms.txt published and valid | ⚠️ | ⚠️ | ⚠️ | ✅ |
+| JSON-LD structured data | ⚠️ | ⚠️ | ✅ | ✅ |
+| Content-Signal policy in robots.txt | ⚠️ | ⚠️ | – | ⚠️ |
+| robots.txt allows AI crawlers | ✅ | ✅ | – | ✅ |
+| Sitemap published | ✅ | ✅ | ⚠️ | ✅ |
+| Core page metadata complete | ⚠️ | ⚠️ | ✅ | ✅ |
+| Content in server-rendered HTML | ✅ | ✅ | ✅ | ✅ |
+| Missing paths return a real 404 | ✅ | ✅ | ⚠️ | ✅ |
 
 ```
-calm.com       █████░░░░░░░░░  5/14 checks passed
-headspace.com  ████████████░░  12/14 checks passed
+calm.com        █████░░░░░░░░░  5/14 checks passed
+rootd.io        █████░░░░░░░░░  5/14 checks passed
+wysa.com        ████░░░░░░░░░░  4/14 checks passed
+animafelix.com  █████████████░  13/14 checks passed
 ```
 
-Every cell comes from an observed response. Calm's servers return 403 to ChatGPT's, Claude's and Perplexity's crawlers while returning 200 to a browser from the same machine, seconds apart; Headspace answers all of them. Calm also publishes no llms.txt and no JSON-LD.
+Every cell comes from an observed response. Three of the four apps return 403 to ChatGPT's, Claude's and Perplexity's crawlers while returning 200 to a browser from the same machine seconds apart. The one that answers every crawler is animafelix.com - our own site, disclosed as such in the input file, and the reference implementation for the tooling this skill wraps.
 
 Alongside the report it writes three reviewable drafts, never applied automatically: [`llms.txt`](demo/output/llms.txt) (filled from the live homepage), [`robots-patch.txt`](demo/output/robots-patch.txt) (built against the live robots.txt, existing directives preserved, conflicts flagged), and [`studio-handoff.md`](demo/output/studio-handoff.md).
 
@@ -48,11 +49,11 @@ Three cases, run against this commit on 2026-08-28 during the build window. Full
 
 | Case | What was tested | Observed | Result |
 | --- | --- | --- | --- |
-| Intended | [`domains.md`](demo/input/domains.md) - calm.com vs headspace.com | 5/8/0 vs 12/2/0; four AI crawlers refused by Calm and served by Headspace, plus missing llms.txt and JSON-LD; drafts grounded in HTTP 200 fetches | **pass** ([evidence](demo/output/report.md)) |
+| Intended | [`domains.md`](demo/input/domains.md) - calm.com against rootd.io, wysa.com and animafelix.com | calm.com 5 passing, rootd.io 5, wysa.com 7, animafelix.com 13 of 14; GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot each received 403 from three of the four sites and 200 from the fourth; drafts grounded in HTTP 200 fetches of calm.com | **pass** ([evidence](demo/output/report.md)) |
 | Insufficient evidence | [`insufficient.md`](demo/input/insufficient.md) - unreachable primary | Primary marked UNKNOWN and excluded from comparison rather than called weak; drafts degraded to `[TODO]` stubs naming the reason; competitor still audited normally | **pass** ([evidence](demo/output/evals/case2-insufficient-report.md)) |
 | Failure / exclusion | [`refused.md`](demo/input/refused.md) - `localhost`, `192.168.1.1`, credentialed URL | All three refused at validation, exit code 2, no network request made | **pass** ([evidence](demo/output/evals/case3-refused-stdout.txt)) |
 
-Reusability was checked on unrelated inputs the same day - including notion.so against monday.com in a completely different category - with no edits to the skill.
+Reusability was checked on unrelated inputs the same day - notion.so against monday.com in a completely different category - with no edits to the skill.
 
 ## How it works
 

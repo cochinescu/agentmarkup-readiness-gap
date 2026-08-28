@@ -1,6 +1,9 @@
-# Source: public homepages and robots.txt of Calm and Headspace (direct competitors in consumer mental-wellness apps)
-# Source URLs: https://calm.com, https://headspace.com
-# Retrieved: 2026-08-28, live during the GTM Skillathon build window
+# Consumer mental-wellness and anxiety apps.
+# Source URLs: https://calm.com, https://rootd.io, https://wysa.com, https://animafelix.com
+# Retrieved: 2026-08-28, live during the GTM Skillathon build window.
 # First domain is "you"; the rest are competitors.
+# Disclosure: animafelix.com is our own site, included as a reference implementation that uses agentmarkup.
 calm.com
-headspace.com
+rootd.io
+wysa.com
+animafelix.com

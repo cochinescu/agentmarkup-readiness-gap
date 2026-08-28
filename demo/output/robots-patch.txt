@@ -1,6 +1,6 @@
 # Append to your existing robots.txt — this block preserves existing directives.
 # Built against your live robots.txt (HTTP 200).
-# Review before publishing. Generated 2026-08-28T16:44:07.403Z from live audit of https://calm.com.
+# Review before publishing. Generated 2026-08-28T16:59:26.754Z from live audit of https://calm.com.
 # BEGIN agentmarkup AI crawlers
 Content-Signal: search=yes, ai-train=no
 User-agent: GPTBot
