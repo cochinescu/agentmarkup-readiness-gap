@@ -14,12 +14,22 @@ Given a file with your domain and up to three competitors, `$agentmarkup-readine
 
 Real output from `demo/input/domains.md`, committed in [`demo/output/report.md`](demo/output/report.md):
 
-| Crawler | notion.so | monday.com |
+| Check | notion.so | monday.com |
 | --- | --- | --- |
-| GPTBot (ChatGPT) | ✅ 200 | ✅ 200 |
-| ClaudeBot (Claude) | ✅ 200 | ✅ 200 |
-| PerplexityBot | ✅ 200 | ✅ 200 |
-| Google-Extended | ⚠️ 403 | ✅ 200 |
+| GPTBot (ChatGPT) can fetch the page | ✅ 200 | ✅ 200 |
+| OAI-SearchBot can fetch the page | ✅ 200 | ✅ 200 |
+| ClaudeBot (Claude) can fetch the page | ✅ 200 | ✅ 200 |
+| PerplexityBot can fetch the page | ✅ 200 | ✅ 200 |
+| Google-Extended can fetch the page | ⚠️ 403 | ✅ 200 |
+| llms.txt published and valid | ❌ | ✅ |
+| llms.txt linked from the homepage | ⚠️ | ⚠️ |
+| JSON-LD structured data | ⚠️ | ✅ |
+| Content-Signal policy in robots.txt | ⚠️ | ✅ |
+| robots.txt allows AI crawlers | ✅ | ✅ |
+| Sitemap published | ✅ | ✅ |
+| Core page metadata complete | ✅ | ✅ |
+| Content in server-rendered HTML | ✅ | ✅ |
+| Missing paths return a real 404 | ⚠️ | ✅ |
 
 ```
 notion.so   ████████░░░░░░  8/14 checks passed

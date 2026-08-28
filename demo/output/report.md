@@ -1,6 +1,6 @@
 # AgentMarkup readiness gap
 
-Generated 2026-08-28T15:42:51.753Z from live audits. "You" = https://notion.so -> https://www.notion.com/; competitors: https://monday.com.
+Generated 2026-08-28T16:03:15.503Z from live audits. "You" = https://notion.so -> https://www.notion.com/; competitors: https://monday.com.
 
 ## Top actions
 
@@ -10,15 +10,26 @@ Generated 2026-08-28T15:42:51.753Z from live audits. "You" = https://notion.so -
 | Google google-extended hit a bot challenge | google-extended → status=403; browser → status=200 | infrastructure |
 | No Content-Signal policy in robots.txt | reported by the audit; see the findings below | agentmarkup |
 
-## Can AI crawlers reach the page?
+## AI readiness matrix
 
-| Crawler | notion.so | monday.com |
+| Check | notion.so | monday.com |
 | --- | --- | --- |
-| GPTBot (ChatGPT) | ✅ 200 | ✅ 200 |
-| OAI-SearchBot | ✅ 200 | ✅ 200 |
-| ClaudeBot (Claude) | ✅ 200 | ✅ 200 |
-| PerplexityBot | ✅ 200 | ✅ 200 |
-| Google-Extended | ⚠️ 403 | ✅ 200 |
+| GPTBot (ChatGPT) can fetch the page | ✅ 200 | ✅ 200 |
+| OAI-SearchBot can fetch the page | ✅ 200 | ✅ 200 |
+| ClaudeBot (Claude) can fetch the page | ✅ 200 | ✅ 200 |
+| PerplexityBot can fetch the page | ✅ 200 | ✅ 200 |
+| Google-Extended can fetch the page | ⚠️ 403 | ✅ 200 |
+| llms.txt published and valid | ❌ | ✅ |
+| llms.txt linked from the homepage | ⚠️ | ⚠️ |
+| JSON-LD structured data | ⚠️ | ✅ |
+| Content-Signal policy in robots.txt | ⚠️ | ✅ |
+| robots.txt allows AI crawlers | ✅ | ✅ |
+| Sitemap published | ✅ | ✅ |
+| Core page metadata complete | ✅ | ✅ |
+| Content in server-rendered HTML | ✅ | ✅ |
+| Missing paths return a real 404 | ⚠️ | ✅ |
+
+✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.
 
 ## Coverage
 ```
@@ -26,8 +37,8 @@ notion.so   ████████░░░░░░  8/14 checks passed
 monday.com  █████████████░  13/14 checks passed
 ```
 
-- https://notion.so: 8 pass / 5 warn / 1 error (fetched 2026-08-28T15:42:42.228Z)
-- https://monday.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T15:42:42.228Z)
+- https://notion.so: 8 pass / 5 warn / 1 error (fetched 2026-08-28T16:03:05.810Z)
+- https://monday.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T16:03:05.708Z)
 - Grounding: homepage 200 (241475 bytes, final https://www.notion.com/); robots.txt 200
 
 How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
@@ -74,4 +85,4 @@ Versus https://monday.com (8 vs 13 passing):
 - Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
 
 ## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T15:42:51.753Z.
+Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T16:03:15.503Z.

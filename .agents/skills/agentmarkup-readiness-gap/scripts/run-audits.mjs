@@ -155,16 +155,47 @@ const crawlerCell = (a, key) => {
   const code = m ? m[1] : (f.level === 'pass' ? '200' : '?');
   return f.level === 'pass' ? `✅ ${code}` : `⚠️ ${code}`;
 };
+// Feature rows: one per readiness topic, matched by finding-code prefix. The audit uses a
+// different code for the pass and fail state of the same check, so match on the topic.
+const TOPICS = [
+  ['llms.', 'llms.txt published and valid', ['llms.present', 'llms.invalid', 'llms.missing']],
+  ['llms.no-discovery-link', 'llms.txt linked from the homepage', ['llms.no-discovery-link']],
+  ['jsonld.', 'JSON-LD structured data', null],
+  ['robots.content-signal|robots.no-content-signal', 'Content-Signal policy in robots.txt', null],
+  ['robots.crawlers-', 'robots.txt allows AI crawlers', null],
+  ['sitemap.', 'Sitemap published', null],
+  ['meta.', 'Core page metadata complete', null],
+  ['js.', 'Content in server-rendered HTML', null],
+  ['notfound.', 'Missing paths return a real 404', null],
+];
+const icon = (lvl) => (lvl === 'pass' ? '✅' : lvl === 'error' ? '❌' : lvl === 'warn' ? '⚠️' : '–');
+const topicCell = (a, prefix, only) => {
+  if (a.status !== 'ok') return 'UNKNOWN';
+  const fs2 = (a.json.findings || []).filter((f) => {
+    const c = String(f.code ?? '');
+    if (only) return only.includes(c);
+    if (prefix.includes('|')) return prefix.split('|').includes(c);
+    return c.startsWith(prefix) && !(prefix === 'llms.' && c === 'llms.no-discovery-link');
+  });
+  if (!fs2.length) return '–';
+  const worst = fs2.some((f) => f.level === 'error') ? 'error' : fs2.some((f) => f.level === 'warn') ? 'warn' : 'pass';
+  return icon(worst);
+};
 if (audits.some((a) => a.status === 'ok')) {
-  lines.push(`## Can AI crawlers reach the page?`, ``);
-  lines.push(`| Crawler | ${audits.map((a) => new URL(a.url).hostname).join(' | ')} |`);
-  lines.push(`| --- | ${audits.map(() => '---').join(' | ')} |`);
+  const heads = audits.map((a) => new URL(a.url).hostname);
+  lines.push(`## AI readiness matrix`, ``);
+  lines.push(`| Check | ${heads.join(' | ')} |`, `| --- | ${audits.map(() => '---').join(' | ')} |`);
   for (const [key, label] of CRAWLERS) {
     const row = audits.map((a) => crawlerCell(a, key));
     if (row.every((c) => c === '-')) continue;
+    lines.push(`| ${label} can fetch the page | ${row.join(' | ')} |`);
+  }
+  for (const [prefix, label, only] of TOPICS) {
+    const row = audits.map((a) => topicCell(a, prefix, only));
+    if (row.every((c) => c === '–')) continue;
     lines.push(`| ${label} | ${row.join(' | ')} |`);
   }
-  lines.push(``);
+  lines.push(``, `✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.`, ``);
 }
 
 lines.push(`## Coverage`);
