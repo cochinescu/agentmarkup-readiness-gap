@@ -5,4 +5,4 @@
 ## Pages
 - [TODO curated key pages with one-line descriptions]
 
-# Draft generated 2026-08-28T15:32:02.853Z by agentmarkup-readiness-gap from the live homepage of https://notion.so (HTTP 200); review before publishing
+# Draft generated 2026-08-28T15:42:51.753Z by agentmarkup-readiness-gap from the live homepage of https://notion.so (HTTP 200); review before publishing

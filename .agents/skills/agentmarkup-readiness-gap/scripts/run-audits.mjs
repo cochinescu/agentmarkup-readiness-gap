@@ -140,7 +140,46 @@ if (you.status === 'ok') {
     lines.push(``);
   }
 }
+// Crawler access matrix: the headline picture. One row per AI crawler, one column per site,
+// each cell the observed status code. Pure text so it renders in any markdown viewer.
+const CRAWLERS = [
+  ['gptbot', 'GPTBot (ChatGPT)'], ['oai-searchbot', 'OAI-SearchBot'],
+  ['claudebot', 'ClaudeBot (Claude)'], ['perplexitybot', 'PerplexityBot'],
+  ['google-extended', 'Google-Extended'],
+];
+const crawlerCell = (a, key) => {
+  if (a.status !== 'ok') return 'UNKNOWN';
+  const f = (a.json.findings || []).find((x) => String(x.code ?? '').startsWith('crawler.') && String(x.evidence ?? '').toLowerCase().includes(key));
+  if (!f) return '-';
+  const m = /status=(\d{3})/.exec(f.evidence ?? '');
+  const code = m ? m[1] : (f.level === 'pass' ? '200' : '?');
+  return f.level === 'pass' ? `✅ ${code}` : `⚠️ ${code}`;
+};
+if (audits.some((a) => a.status === 'ok')) {
+  lines.push(`## Can AI crawlers reach the page?`, ``);
+  lines.push(`| Crawler | ${audits.map((a) => new URL(a.url).hostname).join(' | ')} |`);
+  lines.push(`| --- | ${audits.map(() => '---').join(' | ')} |`);
+  for (const [key, label] of CRAWLERS) {
+    const row = audits.map((a) => crawlerCell(a, key));
+    if (row.every((c) => c === '-')) continue;
+    lines.push(`| ${label} | ${row.join(' | ')} |`);
+  }
+  lines.push(``);
+}
+
 lines.push(`## Coverage`);
+const bar = (n, total) => '█'.repeat(Math.max(0, n)) + '░'.repeat(Math.max(0, total - n));
+const maxChecks = Math.max(...audits.filter((a) => a.status === 'ok').map((a) => a.counts.pass + a.counts.warn + a.counts.error), 1);
+if (audits.some((a) => a.status === 'ok')) {
+  lines.push('```');
+  for (const a of audits) {
+    const host = new URL(a.url).hostname.padEnd(Math.max(...audits.map((x) => new URL(x.url).hostname.length)));
+    lines.push(a.status === 'ok'
+      ? `${host}  ${bar(a.counts.pass, maxChecks)}  ${a.counts.pass}/${maxChecks} checks passed`
+      : `${host}  ${'?'.repeat(maxChecks)}  UNKNOWN`);
+  }
+  lines.push('```', ``);
+}
 for (const a of audits) {
   lines.push(a.status === 'ok'
     ? `- ${a.url}: ${a.counts.pass} pass / ${a.counts.warn} warn / ${a.counts.error} error (fetched ${a.fetchedAt})`

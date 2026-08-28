@@ -28,11 +28,11 @@ While it runs, say: "The first website is treated as ours, Notion, the second as
 
 ## Show this - 25 seconds
 
-Open `out/report.md`. Point to **Top actions** (a three-row table), then Gaps versus competitors, then the triaged fix plan.
+Open `out/report.md`. Point to **Top actions**, then the **crawler access table** - one row per AI crawler, one column per site, the observed status code in each cell - then the pass-bars, then the triaged fix plan.
 
 **Result:** a gap report that opens with the top three actions and who owns each - **read the two passing-check totals off the live screen** - plus three ready-to-review drafts: `out/llms.txt`, `out/robots-patch.txt`, `out/studio-handoff.md`.
 
-Say: "Notion passes [read count] checks, monday.com passes [read count]. Notion ships an llms.txt but [read the failure]. Google's AI crawler received [read the response] - the server evidence is printed right there."
+Say: "Look at the crawler table - every cell is a real status code from a real request. Notion passes [read count] checks, monday.com passes [read count]. Notion ships an llms.txt but [read the failure]. Google's AI crawler received [read the response] - the server evidence is printed right there."
 
 **Evidence:** every finding carries the raw server response and a fetched-at timestamp; the Limitations section states what was not tested.
 
