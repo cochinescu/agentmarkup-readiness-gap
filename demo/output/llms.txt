@@ -1,8 +1,8 @@
-# The AI workspace that works for you. | Notion
+# Calm - The #1 App for Meditation and Sleep
 
-> Build Custom Agents, search across all your apps, and automate busywork. The AI workspace where teams get more done, faster.
+> Calm is the #1 app for sleep and meditation. Join the millions experiencing better sleep, lower stress, and less anxiety.
 
 ## Pages
 - [TODO curated key pages with one-line descriptions]
 
-# Draft generated 2026-08-28T16:03:15.503Z by agentmarkup-readiness-gap from the live homepage of https://notion.so (HTTP 200); review before publishing
+# Draft generated 2026-08-28T16:44:07.403Z by agentmarkup-readiness-gap from the live homepage of https://calm.com (HTTP 200); review before publishing

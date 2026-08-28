@@ -1,10 +1,10 @@
 # AgentMarkup readiness gap
 
-Generated 2026-08-28T16:03:02.590Z from live audits. "You" = https://nonexistent-zz9x7q-skillathon.invalid -> https://nonexistent-zz9x7q-skillathon.invalid/; competitors: https://monday.com.
+Generated 2026-08-28T16:43:53.693Z from live audits. "You" = https://nonexistent-zz9x7q-skillathon.invalid -> https://nonexistent-zz9x7q-skillathon.invalid/; competitors: https://headspace.com.
 
 ## AI readiness matrix
 
-| Check | nonexistent-zz9x7q-skillathon.invalid | monday.com |
+| Check | nonexistent-zz9x7q-skillathon.invalid | headspace.com |
 | --- | --- | --- |
 | GPTBot (ChatGPT) can fetch the page | UNKNOWN | ✅ 200 |
 | OAI-SearchBot can fetch the page | UNKNOWN | ✅ 200 |
@@ -14,7 +14,7 @@ Generated 2026-08-28T16:03:02.590Z from live audits. "You" = https://nonexistent
 | llms.txt published and valid | UNKNOWN | ✅ |
 | llms.txt linked from the homepage | UNKNOWN | ⚠️ |
 | JSON-LD structured data | UNKNOWN | ✅ |
-| Content-Signal policy in robots.txt | UNKNOWN | ✅ |
+| Content-Signal policy in robots.txt | UNKNOWN | ⚠️ |
 | robots.txt allows AI crawlers | UNKNOWN | ✅ |
 | Sitemap published | UNKNOWN | ✅ |
 | Core page metadata complete | UNKNOWN | ✅ |
@@ -26,16 +26,17 @@ Generated 2026-08-28T16:03:02.590Z from live audits. "You" = https://nonexistent
 ## Coverage
 ```
 nonexistent-zz9x7q-skillathon.invalid  ??????????????  UNKNOWN
-monday.com                             █████████████░  13/14 checks passed
+headspace.com                          ████████████░░  12/14 checks passed
 ```
 
 - https://nonexistent-zz9x7q-skillathon.invalid: UNKNOWN (no browser baseline (crawler.control-failed)) — excluded from comparison, not a weakness
-- https://monday.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T16:02:55.882Z)
+- https://headspace.com: 12 pass / 2 warn / 0 error (fetched 2026-08-28T16:43:44.319Z)
 - Grounding: homepage fetch-failed — NOT usable as evidence; robots.txt fetch-failed — NOT usable as evidence
 
 How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
 
-## https://monday.com warn/error findings
+## https://headspace.com warn/error findings
+- WARN — No Content-Signal policy in robots.txt
 - WARN — llms.txt is not linked from the homepage
 
 ## Fix exits
@@ -43,4 +44,4 @@ How to read the evidence: each site was requested twice, once under an AI crawle
 - Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
 
 ## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 1. Grounding for "you" failed or was unusable, so drafts are [TODO] stubs. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T16:03:02.590Z.
+Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 1. Grounding for "you" failed or was unusable, so drafts are [TODO] stubs. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T16:43:53.693Z.

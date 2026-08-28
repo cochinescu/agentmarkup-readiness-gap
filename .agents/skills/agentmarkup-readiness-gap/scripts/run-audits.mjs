@@ -126,6 +126,7 @@ const OWNER = {
   'meta.incomplete': 'content owner', 'js.client-rendered': 'content owner',
   'notfound.soft404': 'infrastructure', 'notfound.unknown': 'infrastructure',
   'crawler.bot-challenge': 'infrastructure', 'crawler.blocked': 'infrastructure', 'crawler.rate-limited': 'infrastructure',
+  'crawler.ua-differential-block': 'infrastructure', 'crawler.ip-block': 'infrastructure',
 };
 if (you.status === 'ok') {
   const top = [...(you.json.findings || []).filter((f) => f.level !== 'pass')]
@@ -135,7 +136,7 @@ if (you.status === 'ok') {
     lines.push(`## Top actions`, ``);
     lines.push(`| Finding | Observed evidence | Who fixes it |`, `| --- | --- | --- |`);
     for (const f of top) {
-      lines.push(`| ${esc(f.title)} | ${esc(f.evidence) || 'reported by the audit; see the findings below'} | ${OWNER[f.code] ?? 'needs review'} |`);
+      lines.push(`| ${esc(f.title)} | ${esc(f.evidence) || 'reported by the audit; see the findings below'} | ${OWNER[f.code] ?? (String(f.code ?? '').startsWith('crawler.') ? 'infrastructure' : 'needs review')} |`);
     }
     lines.push(``);
   }
@@ -256,10 +257,11 @@ if (you.status === 'ok') {
     'meta.incomplete': 'content', 'js.client-rendered': 'content',
     'notfound.soft404': 'infra', 'notfound.unknown': 'infra',
     'crawler.bot-challenge': 'infra', 'crawler.blocked': 'infra', 'crawler.rate-limited': 'infra',
+    'crawler.ua-differential-block': 'infra', 'crawler.ip-block': 'infra',
   };
   const ordered = [...warnErr(you)].sort((a, b) => (a.level === 'error' ? -1 : 1) - (b.level === 'error' ? -1 : 1));
   const bucketed = { tool: [], content: [], infra: [], other: [] };
-  for (const f of ordered) bucketed[BUCKET[f.code] ?? 'other'].push(f);
+  for (const f of ordered) bucketed[BUCKET[f.code] ?? (String(f.code ?? '').startsWith('crawler.') ? 'infra' : 'other')].push(f);
   const render = (arr) => arr.map((f) => `- [${f.level}] ${esc(f.title)}${f.fix ? ` -> ${esc(f.fix)}` : ''}`);
 
   lines.push(`## Fix plan, triaged (errors first, using the audit's own fix guidance)`);

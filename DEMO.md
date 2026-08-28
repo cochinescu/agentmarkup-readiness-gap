@@ -14,7 +14,7 @@ Fallback at ~60 seconds: open [`demo/output/report.md`](demo/output/report.md).
 
 **Boundary - what it never does:** it never invents a score and never claims who ChatGPT cites or how anyone ranks.
 
-Say: "AI assistants cannot understand what they cannot reliably reach, yet most teams only guess whether their website is ready. Notion tried - it ships an llms.txt - and still got it wrong. Trying is not enough; you need measurement. So we are comparing Notion with monday.com, live."
+Say: "When someone asks ChatGPT for the best meditation app, ChatGPT has to be able to read the site first. Calm - a company that raised hundreds of millions - answers a browser but slams the door on ChatGPT's crawler. Headspace lets it in. Nobody at Calm decided that; a bot-protection rule did. We are checking both, live."
 
 ## Run this - 60 seconds
 
@@ -24,7 +24,7 @@ Say: "AI assistants cannot understand what they cannot reliably reach, yet most 
 4. Watch for: four files written to `out/` and a five-line summary printed.
 5. If nothing visible after 60 seconds, open the fallback: [`demo/output/report.md`](demo/output/report.md).
 
-While it runs, say: "The first website is treated as ours, Notion, the second as its competitor, monday.com. The skill visits both sites live while identifying itself as GPTBot, ClaudeBot, PerplexityBot and Google-Extended, then compares their responses check by check. Every claim is backed by the server's raw answer. It also drafts the fixes. This grew from agentmarkup, open-source tooling Sebastian built after realizing ChatGPT could find his wife's art studio website but could not understand it."
+While it runs, say: "The first website is treated as ours, Calm, the second as its competitor, Headspace. The skill visits both sites live while identifying itself as GPTBot, ClaudeBot, PerplexityBot and Google-Extended, then compares their responses check by check. Every claim is backed by the server's raw answer. It also drafts the fixes. This grew from agentmarkup, open-source tooling Sebastian built after realizing ChatGPT could find his wife's art studio website but could not understand it."
 
 ## Show this - 25 seconds
 
@@ -32,7 +32,7 @@ Open `out/report.md`. Point to **Top actions**, then the **AI readiness matrix**
 
 **Result:** a gap report that opens with the top three actions and who owns each - **read the two passing-check totals off the live screen** - plus three ready-to-review drafts: `out/llms.txt`, `out/robots-patch.txt`, `out/studio-handoff.md`.
 
-Say: "Look at the matrix - one column per company, one row per check, and every cell comes from a real response. Notion passes [read count] checks, monday.com passes [read count]. Notion ships an llms.txt but [read the failure]. Google's AI crawler received [read the response] - the server evidence is printed right there."
+Say: "Look at the matrix - one column per company, one row per check, every cell a real response. Calm passes [read count] checks, Headspace [read count]. These rows - [read the crawler names] - are 403 to the crawler and 200 to a browser, taken seconds apart from the same machine. That is a company being invisible to AI assistants without knowing it."
 
 **Evidence:** every finding carries the raw server response and a fetched-at timestamp; the Limitations section states what was not tested.
 
@@ -50,7 +50,7 @@ Say: "Look at the matrix - one column per company, one row per check, and every 
 
 ## Close - 5 seconds
 
-**Reusable on:** any file of public domains, no edits. Same evening we ran it on animafelix.com versus Calm, Headspace and Rootd - unchanged.
+**Reusable on:** any file of public domains, no edits. Same evening we ran it on notion.so versus monday.com, a completely different category - unchanged.
 
 **Material limitation:** crawl readiness is a prerequisite for AI visibility, not proof of it. The report says plainly which findings agentmarkup can fix, which need a human content change, which are server or bot-protection settings, and that third-party authority is not measurable here at all.
 

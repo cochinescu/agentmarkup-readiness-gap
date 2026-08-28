@@ -1,50 +1,53 @@
 {
-  "url": "https://notion.so",
-  "finalUrl": "https://www.notion.com/",
-  "fetchedAt": "2026-08-28T16:03:05.810Z",
+  "url": "https://calm.com",
+  "finalUrl": "https://www.calm.com/",
+  "fetchedAt": "2026-08-28T16:43:56.521Z",
   "findings": [
     {
-      "code": "crawler.accessible",
-      "level": "pass",
-      "title": "OpenAI gptbot can reach the page",
-      "detail": "A request with the gptbot user-agent returned the same success class as a browser.",
-      "evidence": "gptbot → status=200; browser → status=200"
-    },
-    {
-      "code": "crawler.accessible",
-      "level": "pass",
-      "title": "OpenAI oai-searchbot can reach the page",
-      "detail": "A request with the oai-searchbot user-agent returned the same success class as a browser.",
-      "evidence": "oai-searchbot → status=200; browser → status=200"
-    },
-    {
-      "code": "crawler.accessible",
-      "level": "pass",
-      "title": "Anthropic claudebot can reach the page",
-      "detail": "A request with the claudebot user-agent returned the same success class as a browser.",
-      "evidence": "claudebot → status=200; browser → status=200"
-    },
-    {
-      "code": "crawler.accessible",
-      "level": "pass",
-      "title": "Perplexity perplexitybot can reach the page",
-      "detail": "A request with the perplexitybot user-agent returned the same success class as a browser.",
-      "evidence": "perplexitybot → status=200; browser → status=200"
-    },
-    {
-      "code": "crawler.bot-challenge",
+      "code": "crawler.ua-differential-block",
       "level": "warn",
-      "title": "Google google-extended hit a bot challenge",
-      "detail": "The google-extended user-agent got a challenge/verification response (403). Because google-extended is verified by reverse-dns, the real crawler may pass where this spoofed user-agent does not. Confirm the verified bot is allowlisted at your CDN.",
-      "evidence": "google-extended → status=403; browser → status=200",
-      "fix": "Allowlist the crawler by its published IP ranges (verified bots) rather than relying on user-agent rules."
+      "title": "OpenAI gptbot is blocked from a generic IP",
+      "detail": "A browser gets 200 but the gptbot user-agent gets 403, with no challenge signal. Two things cause this and they mean opposite things: a user-agent-string WAF rule (which also blocks the real gptbot) or IP allowlisting (where the verified gptbot is fine). Check which it is at your CDN.",
+      "evidence": "gptbot → status=403; browser → status=200",
+      "fix": "If a WAF rule blocks the \"gptbot\" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed."
+    },
+    {
+      "code": "crawler.ua-differential-block",
+      "level": "warn",
+      "title": "OpenAI oai-searchbot is blocked from a generic IP",
+      "detail": "A browser gets 200 but the oai-searchbot user-agent gets 403, with no challenge signal. Two things cause this and they mean opposite things: a user-agent-string WAF rule (which also blocks the real oai-searchbot) or IP allowlisting (where the verified oai-searchbot is fine). Check which it is at your CDN.",
+      "evidence": "oai-searchbot → status=403; browser → status=200",
+      "fix": "If a WAF rule blocks the \"oai-searchbot\" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed."
+    },
+    {
+      "code": "crawler.ua-differential-block",
+      "level": "warn",
+      "title": "Anthropic claudebot is blocked from a generic IP",
+      "detail": "A browser gets 200 but the claudebot user-agent gets 403, with no challenge signal. Two things cause this and they mean opposite things: a user-agent-string WAF rule (which also blocks the real claudebot) or IP allowlisting (where the verified claudebot is fine). Check which it is at your CDN.",
+      "evidence": "claudebot → status=403; browser → status=200",
+      "fix": "If a WAF rule blocks the \"claudebot\" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed."
+    },
+    {
+      "code": "crawler.ua-differential-block",
+      "level": "warn",
+      "title": "Perplexity perplexitybot is blocked from a generic IP",
+      "detail": "A browser gets 200 but the perplexitybot user-agent gets 403, with no challenge signal. Two things cause this and they mean opposite things: a user-agent-string WAF rule (which also blocks the real perplexitybot) or IP allowlisting (where the verified perplexitybot is fine). Check which it is at your CDN.",
+      "evidence": "perplexitybot → status=403; browser → status=200",
+      "fix": "If a WAF rule blocks the \"perplexitybot\" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed."
+    },
+    {
+      "code": "crawler.accessible",
+      "level": "pass",
+      "title": "Google google-extended can reach the page",
+      "detail": "A request with the google-extended user-agent returned the same success class as a browser.",
+      "evidence": "google-extended → status=200; browser → status=200"
     },
     {
       "code": "js.server-rendered",
       "level": "pass",
       "title": "Content is present without JavaScript",
       "detail": "The raw HTML already contains meaningful text, so crawlers that do not execute JavaScript can read the page.",
-      "evidence": "raw text length=2588"
+      "evidence": "raw text length=15319"
     },
     {
       "code": "robots.crawlers-allowed",
@@ -60,17 +63,11 @@
       "fix": "Enable agentmarkup contentSignalHeaders so Content-Signal is written into robots.txt."
     },
     {
-      "code": "llms.invalid",
-      "level": "error",
-      "title": "llms.txt has errors",
-      "detail": "llms.txt must start with an H1 heading (# Site Name)"
-    },
-    {
-      "code": "llms.no-discovery-link",
+      "code": "llms.missing",
       "level": "warn",
-      "title": "llms.txt is not linked from the homepage",
-      "detail": "An llms.txt exists but the homepage has no <link rel=\"alternate\" type=\"text/plain\" href=\"/llms.txt\">, so agents cannot discover it from the page.",
-      "fix": "agentmarkup injects this discovery link automatically."
+      "title": "No llms.txt found",
+      "detail": "No reachable /llms.txt. This is optional — it helps AI coding tools and some assistants, but major crawlers do not require it.",
+      "fix": "Generate llms.txt with agentmarkup if you want a curated agent manifest."
     },
     {
       "code": "jsonld.missing",
@@ -86,25 +83,27 @@
       "detail": "A sitemap is declared in robots.txt, which helps crawlers and AI systems discover all of your pages."
     },
     {
-      "code": "meta.complete",
-      "level": "pass",
-      "title": "Core page metadata present",
-      "detail": "The page has a title, a meta description, and a canonical link, which help AI systems and search attribute the page."
+      "code": "meta.incomplete",
+      "level": "warn",
+      "title": "Core page metadata is incomplete",
+      "detail": "Missing: canonical. Title, meta description, and canonical link help AI systems and search understand and correctly attribute the page.",
+      "evidence": "missing: canonical",
+      "fix": "Add the missing head tags; agentmarkup keeps these consistent on generated pages."
     },
     {
-      "code": "notfound.unknown",
-      "level": "warn",
-      "title": "Could not determine how missing paths are handled",
-      "detail": "The request for a path that should not exist did not complete, so it is unknown whether this site returns a real 404. A timeout or a block is not evidence of a soft-404.",
-      "evidence": "too-many-redirects"
+      "code": "notfound.ok",
+      "level": "pass",
+      "title": "Missing paths return a real 404",
+      "detail": "A path that does not exist answered with a real not-found status, so an agent can tell a missing resource from a real one.",
+      "evidence": "GET https://calm.com/agentmarkup-probe-404-does-not-exist-9f3a2c -> 404"
     }
   ],
   "summary": {
-    "pass": 8,
-    "warn": 5,
-    "error": 1,
-    "checks": 14,
-    "passed": 8,
-    "worst": "error"
+    "pass": 5,
+    "warn": 8,
+    "error": 0,
+    "checks": 13,
+    "passed": 5,
+    "worst": "warn"
   }
 }

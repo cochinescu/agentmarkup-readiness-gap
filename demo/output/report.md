@@ -1,82 +1,88 @@
 # AgentMarkup readiness gap
 
-Generated 2026-08-28T16:03:15.503Z from live audits. "You" = https://notion.so -> https://www.notion.com/; competitors: https://monday.com.
+Generated 2026-08-28T16:44:07.403Z from live audits. "You" = https://calm.com -> https://www.calm.com/; competitors: https://headspace.com.
 
 ## Top actions
 
 | Finding | Observed evidence | Who fixes it |
 | --- | --- | --- |
-| llms.txt has errors | reported by the audit; see the findings below | agentmarkup |
-| Google google-extended hit a bot challenge | google-extended → status=403; browser → status=200 | infrastructure |
-| No Content-Signal policy in robots.txt | reported by the audit; see the findings below | agentmarkup |
+| OpenAI gptbot is blocked from a generic IP | gptbot → status=403; browser → status=200 | infrastructure |
+| OpenAI oai-searchbot is blocked from a generic IP | oai-searchbot → status=403; browser → status=200 | infrastructure |
+| Anthropic claudebot is blocked from a generic IP | claudebot → status=403; browser → status=200 | infrastructure |
 
 ## AI readiness matrix
 
-| Check | notion.so | monday.com |
+| Check | calm.com | headspace.com |
 | --- | --- | --- |
-| GPTBot (ChatGPT) can fetch the page | ✅ 200 | ✅ 200 |
-| OAI-SearchBot can fetch the page | ✅ 200 | ✅ 200 |
-| ClaudeBot (Claude) can fetch the page | ✅ 200 | ✅ 200 |
-| PerplexityBot can fetch the page | ✅ 200 | ✅ 200 |
-| Google-Extended can fetch the page | ⚠️ 403 | ✅ 200 |
-| llms.txt published and valid | ❌ | ✅ |
-| llms.txt linked from the homepage | ⚠️ | ⚠️ |
+| GPTBot (ChatGPT) can fetch the page | ⚠️ 403 | ✅ 200 |
+| OAI-SearchBot can fetch the page | ⚠️ 403 | ✅ 200 |
+| ClaudeBot (Claude) can fetch the page | ⚠️ 403 | ✅ 200 |
+| PerplexityBot can fetch the page | ⚠️ 403 | ✅ 200 |
+| Google-Extended can fetch the page | ✅ 200 | ✅ 200 |
+| llms.txt published and valid | ⚠️ | ✅ |
+| llms.txt linked from the homepage | – | ⚠️ |
 | JSON-LD structured data | ⚠️ | ✅ |
-| Content-Signal policy in robots.txt | ⚠️ | ✅ |
+| Content-Signal policy in robots.txt | ⚠️ | ⚠️ |
 | robots.txt allows AI crawlers | ✅ | ✅ |
 | Sitemap published | ✅ | ✅ |
-| Core page metadata complete | ✅ | ✅ |
+| Core page metadata complete | ⚠️ | ✅ |
 | Content in server-rendered HTML | ✅ | ✅ |
-| Missing paths return a real 404 | ⚠️ | ✅ |
+| Missing paths return a real 404 | ✅ | ✅ |
 
 ✅ pass · ⚠️ warning · ❌ error · UNKNOWN not auditable. Every cell comes from an observed response; nothing is inferred.
 
 ## Coverage
 ```
-notion.so   ████████░░░░░░  8/14 checks passed
-monday.com  █████████████░  13/14 checks passed
+calm.com       █████░░░░░░░░░  5/14 checks passed
+headspace.com  ████████████░░  12/14 checks passed
 ```
 
-- https://notion.so: 8 pass / 5 warn / 1 error (fetched 2026-08-28T16:03:05.810Z)
-- https://monday.com: 13 pass / 1 warn / 0 error (fetched 2026-08-28T16:03:05.708Z)
-- Grounding: homepage 200 (241475 bytes, final https://www.notion.com/); robots.txt 200
+- https://calm.com: 5 pass / 8 warn / 0 error (fetched 2026-08-28T16:43:56.521Z)
+- https://headspace.com: 12 pass / 2 warn / 0 error (fetched 2026-08-28T16:43:56.521Z)
+- Grounding: homepage 200 (565142 bytes, final https://www.calm.com/); robots.txt 200
 
 How to read the evidence: each site was requested twice, once under an AI crawler's user-agent and once as a browser. A line like `google-extended -> status=403; browser -> status=200` means that crawler was refused the exact page a browser received.
 
-## https://notion.so warn/error findings
-- WARN — Google google-extended hit a bot challenge
-  Evidence: google-extended → status=403; browser → status=200
+## https://calm.com warn/error findings
+- WARN — OpenAI gptbot is blocked from a generic IP
+  Evidence: gptbot → status=403; browser → status=200
+- WARN — OpenAI oai-searchbot is blocked from a generic IP
+  Evidence: oai-searchbot → status=403; browser → status=200
+- WARN — Anthropic claudebot is blocked from a generic IP
+  Evidence: claudebot → status=403; browser → status=200
+- WARN — Perplexity perplexitybot is blocked from a generic IP
+  Evidence: perplexitybot → status=403; browser → status=200
 - WARN — No Content-Signal policy in robots.txt
-- ERROR — llms.txt has errors
-- WARN — llms.txt is not linked from the homepage
+- WARN — No llms.txt found
 - WARN — No JSON-LD structured data
-- WARN — Could not determine how missing paths are handled
-  Evidence: too-many-redirects
+- WARN — Core page metadata is incomplete
+  Evidence: missing: canonical
 
-## https://monday.com warn/error findings
+## https://headspace.com warn/error findings
+- WARN — No Content-Signal policy in robots.txt
 - WARN — llms.txt is not linked from the homepage
 
 ## Gaps versus competitors
-Versus https://monday.com (8 vs 13 passing):
-- They pass this check, you don't: Google google-extended hit a bot challenge
-- They pass this check, you don't: No Content-Signal policy in robots.txt
-- They pass this check, you don't: llms.txt has errors
+Versus https://headspace.com (5 vs 12 passing):
+- They pass this check, you don't: No llms.txt found
 - They pass this check, you don't: No JSON-LD structured data
+- They pass this check, you don't: Core page metadata is incomplete
 
 ## Fix plan, triaged (errors first, using the audit's own fix guidance)
 
 **1. agentmarkup can fix these** - build-time markup and crawler directives; drafts are in this folder:
-- [error] llms.txt has errors
 - [warn] No Content-Signal policy in robots.txt -> Enable agentmarkup contentSignalHeaders so Content-Signal is written into robots.txt.
-- [warn] llms.txt is not linked from the homepage -> agentmarkup injects this discovery link automatically.
+- [warn] No llms.txt found -> Generate llms.txt with agentmarkup if you want a curated agent manifest.
 - [warn] No JSON-LD structured data -> Add JSON-LD with agentmarkup schema presets (webSite, organization, article, …).
 
 **2. Needs a human content or template change** - no markup tool writes your copy:
-- none
+- [warn] Core page metadata is incomplete -> Add the missing head tags; agentmarkup keeps these consistent on generated pages.
 
 **3. Server, CDN or bot-protection settings** - your infrastructure decides, not your markup:
-- [warn] Google google-extended hit a bot challenge -> Allowlist the crawler by its published IP ranges (verified bots) rather than relying on user-agent rules.
-- [warn] Could not determine how missing paths are handled
+- [warn] OpenAI gptbot is blocked from a generic IP -> If a WAF rule blocks the "gptbot" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed.
+- [warn] OpenAI oai-searchbot is blocked from a generic IP -> If a WAF rule blocks the "oai-searchbot" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed.
+- [warn] Anthropic claudebot is blocked from a generic IP -> If a WAF rule blocks the "claudebot" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed.
+- [warn] Perplexity perplexitybot is blocked from a generic IP -> If a WAF rule blocks the "perplexitybot" user-agent, remove or narrow it. If you allowlist verified bots by IP, no action is needed.
 
 **Not visible from here at all:** third-party authority - who else cites you and how assistants weigh it. No markup tool changes that, and this report does not pretend to measure it.
 
@@ -85,4 +91,4 @@ Versus https://monday.com (8 vs 13 passing):
 - Other stacks: review and continue with out/studio-handoff.md at https://agentmarkup.dev/studio/
 
 ## Limitations
-Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T16:03:15.503Z.
+Citation/assistant visibility was NOT tested; crawl readiness is a prerequisite, not proof of ranking. UNKNOWN domains: 0. Hostname validation is textual only. Findings are a snapshot from 2026-08-28T16:44:07.403Z.
